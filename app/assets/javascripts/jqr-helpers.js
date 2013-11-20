@@ -49,6 +49,9 @@
     var dialogOptions = $(this).data('dialog-options');
     var open = dialogOptions['open'];
     dialogOptions = $.extend(dialogOptions, {
+      'close': function() {
+        $(this).dialog('destroy');
+      },
       'open': function() {
         ujsDialogOpen.call(this);
         if (open) {
