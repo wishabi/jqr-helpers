@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name         = 'jqr-helpers'
-  s.require_paths = %w(. lib lib/jqr-helpers lib/generators app/helpers)
-  s.version      = '1.0.0.beta1'
+  s.require_paths = %w(. lib lib/jqr-helpers)
+  s.version      = '1.0.0'
   s.date         = '2013-11-19'
   s.summary      = 'Helpers to print unobtrusive jQuery-UI tags.'
   s.description  = <<-EOF
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 EOF
   s.authors      = ['Daniel Orner']
   s.email        = 'daniel.orner@wishabi.com'
-  s.files        = Dir['lib/*.rb, lib/generators/*.rb']
+  s.files        = `git ls-files`.split($/)
   s.homepage     = 'https://github.com/wishabi/jqr-helpers'
   s.license       = 'MIT'
 

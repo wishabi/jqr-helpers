@@ -15,15 +15,22 @@ helper methods, but are optimized to make it much easier to use them in
 common scenarios. The existing methods are not altered.
 
 jqr-helpers was developed using jQuery 1.10 and jQuery-UI 1.10, but it should
-be compatible with earlier versions as well.
+be compatible with earlier versions as well. The assumption is that all
+required JS files are included, including jQuery, jQuery-UI, and the jquery-rails
+UJS adapter. jqr-helpers does not attempt to include them itself.
 
 ## Using jqr-helpers ##
 
-If you are running Rails > 3.1, the required assets should be installed
+If you are running Rails >= 3.1, the required assets should be installed
 automatically as part of the asset pipeline. You can require them as needed:
 
     //= require jqr-helpers
     *= require jqr-helpers
+
+If you are running Rails 3.0, you can manually copy the JavaScript and CSS
+into your public folders:
+
+    rails g jqr_helpers:install
 
 ## Helper Methods ##
 
@@ -37,7 +44,6 @@ the dialog content from a remote route)
 * `button_to_ajax` - send an Ajax request when a button is clicked
 * `form_tag_ajax` - send an Ajax request when a form is submitted
 * `form_for_ajax` - ditto but using Rails's `form_for` helper
-* `tab_container` - print tab titles and contents.
 
 There are two sets of options that recur throughout the methods here:
 
