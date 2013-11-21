@@ -44,6 +44,7 @@ the dialog content from a remote route)
 * `button_to_ajax` - send an Ajax request when a button is clicked
 * `form_tag_ajax` - send an Ajax request when a form is submitted
 * `form_for_ajax` - ditto but using Rails's `form_for` helper
+* `tab_container` - create a tab container.
 
 There are two sets of options that recur throughout the methods here:
 
@@ -112,6 +113,18 @@ other elements.
 this indicates that the dialog should be closed when the request completes
 successfully. This is true by default for forms and false for
 other elements.
+
+## Panel Renderers ##
+
+Tabs (and eventually accordion panes and menus) are rendered using a "panel renderer".
+This allows you to loop through the tabs in an intuitive and concise way.
+
+       <%= tab_container {:collapsible => true}, {:class => 'my-tabs}' do |r| %>
+         <%= r.panel 'Tab 1',  do %>
+           My tab content here
+         <% end %>
+         <%= r.panel 'Tab 2', 'http://www.foobar.com/' %>
+       <% end %>
 
 ## jQuery Events ##
 

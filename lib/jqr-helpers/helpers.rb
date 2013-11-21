@@ -1,6 +1,47 @@
 module JqrHelpers
   module Helpers
 
+    # A renderer used for tabs, accordions, etc.
+    class PanelRenderer
+
+      # @return [Array<Hash>]
+      attr_accessor :panels
+
+      def initialize
+        self.panels = []
+      end
+
+      # Render a panel in the parent container. The panel must have either
+      # a URL or a block containing content.
+      # @param title [String]
+      # @param url_or_options [String|Hash] If a URL is given, it will be here
+      #  and the options will be the next parameter. If a block is given,
+      #  this will be the option hash. Options will be passed as is into the
+      #  HTML <li> tag.
+      # @param options [Hash] the options if a URL is given.
+      def panel(title, url_or_options={}, options={}, &block)
+        if url_or_options.is_a?(String)
+          url = url_or_options
+          content = ''
+          id = nil
+        else
+          options = url_or_options
+          content = yield
+          id = (0...8).map { (65 + rand(26)).chr }.join # random string
+          url = '#' + id
+        end
+        options.merge!(:id => id)
+        panels << {
+          :title => title,
+          :url => url,
+          :options => options,
+          :content => content
+        }
+        nil # suppress output
+      end
+
+    end
+
     # Add a link to create a jQuery dialog.
     # If a block is given, dialog_options and html_options are shifted left by
     # 1 and the block is used as the html_content.
@@ -184,6 +225,45 @@ module JqrHelpers
 
       form_for record, options, &block
 
+    end
+
+    # Print a tab container. This expects a block, which will be passed a
+    # PanelRenderer object. Panels can be local (with content) or remote
+    # (with a URL).
+    # @example
+    #   <%= tab_container {:collapsible => true}, {:class => 'my-tabs}' do |r| %>
+    #     <%= r.panel 'Tab 1',  do %>
+    #       My tab content here
+    #     <% end %>
+    #     <%= r.panel 'Tab 2', 'http://www.foobar.com/' %>
+    #   <% end %>
+    # @param options [Hash] options to pass to the jQuery tabs() method.
+    # @param html_options [Hash] options to pass to the tab container element
+    #   itself.
+    def tab_container(options={}, html_options={}, &block)
+      renderer = PanelRenderer.new
+      capture(renderer, &block)
+      html_options[:class] ||= ''
+      html_options[:class] << ' ujs-tab-container'
+      html_options[:'data-tab-options'] = options.to_json
+      content_tag(:div, html_options) do
+        s = content_tag :ul do
+          s2 = ''
+          renderer.panels.each do |panel|
+            s2 << content_tag(:li) do
+              link_to panel[:title], panel[:url]
+            end
+          end
+          raw s2
+        end
+        s3 = renderer.panels.inject('') do |sum, panel|
+          if panel[:options][:id]
+            sum = sum + content_tag(:div, panel[:content], panel[:options])
+          end
+          sum
+        end
+        s + raw(s3)
+      end
     end
 
     private

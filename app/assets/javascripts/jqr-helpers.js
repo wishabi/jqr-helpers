@@ -190,20 +190,24 @@
   }
 
   $(function() {
-    $('.ujs-tab-container', this).tabs({
-      beforeLoad: function(event, ui) {
-        if (ui.tab.data('loaded')) {
-          event.preventDefault();
-          return;
+    $('.ujs-tab-container', this).each(function() {
+      var options = $(this).data('tab-options');
+      options = $.extend(options, {
+        beforeLoad: function(event, ui) {
+          if (ui.tab.data('loaded')) {
+            event.preventDefault();
+            return;
+          }
+          ui.jqXHR.success(function() {
+            ui.tab.data('loaded', true);
+          });
+          $(ui.panel).html('Loading...');
+          ui.jqXHR.fail(function(jqXHR, textStatus, errorThrown) {
+            ui.panel.html('Error loading the tab: ' + errorThrown);
+          });
         }
-        ui.jqXHR.success(function() {
-          ui.tab.data('loaded', true);
-        });
-        $(ui.panel).html('Loading...');
-        ui.jqXHR.fail(function(jqXHR, textStatus, errorThrown) {
-          ui.panel.html('Error loading the tab: ' + errorThrown);
-        });
-      }
+      });
+      $(this).tabs(options);
     });
 
     if ($().on) { // newer jQueries
