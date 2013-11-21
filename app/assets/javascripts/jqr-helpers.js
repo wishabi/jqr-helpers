@@ -18,7 +18,8 @@
 
   // called from dialog button value
   function ujsDialogClose() {
-    $('.ui-dialog-content:visible').dialog('destroy');
+    $('.ui-dialog-content:visible').dialog('destroy')
+        .addClass('ujs-dialog-hidden');
   }
 
   function ujsDialogOpen() {
@@ -50,7 +51,7 @@
     var open = dialogOptions['open'];
     dialogOptions = $.extend(dialogOptions, {
       'close': function() {
-        $(this).dialog('destroy');
+        $(this).dialog('destroy').addClass('ujs-dialog-hidden');
       },
       'open': function() {
         ujsDialogOpen.call(this);
@@ -193,20 +194,20 @@
     $('.ujs-tab-container', this).each(function() {
       var options = $(this).data('tab-options');
       options = $.extend(options, {
-        beforeLoad: function(event, ui) {
-          if (ui.tab.data('loaded')) {
-            event.preventDefault();
-            return;
-          }
-          ui.jqXHR.success(function() {
-            ui.tab.data('loaded', true);
-          });
-          $(ui.panel).html('Loading...');
-          ui.jqXHR.fail(function(jqXHR, textStatus, errorThrown) {
-            ui.panel.html('Error loading the tab: ' + errorThrown);
-          });
+      beforeLoad: function(event, ui) {
+        if (ui.tab.data('loaded')) {
+          event.preventDefault();
+          return;
         }
-      });
+        ui.jqXHR.success(function() {
+          ui.tab.data('loaded', true);
+        });
+        $(ui.panel).html('Loading...');
+        ui.jqXHR.fail(function(jqXHR, textStatus, errorThrown) {
+          ui.panel.html('Error loading the tab: ' + errorThrown);
+        });
+      }
+    });
       $(this).tabs(options);
     });
 
