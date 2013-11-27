@@ -190,28 +190,35 @@
     return false;
   }
 
-  $(function() {
-    $('.ujs-tab-container', this).each(function() {
+  function ujsLoadPlugins(event) {
+    $('.ujs-date-picker', event.target).each(function() {
+      var options = $(this).data('date-options');
+      $(this).datepicker(options);
+    });
+    $('.ujs-tab-container', event.target).each(function() {
       var options = $(this).data('tab-options');
       options = $.extend(options, {
-      beforeLoad: function(event, ui) {
-        if (ui.tab.data('loaded')) {
-          event.preventDefault();
-          return;
+        beforeLoad: function(event, ui) {
+          if (ui.tab.data('loaded')) {
+            event.preventDefault();
+            return;
+          }
+          ui.jqXHR.success(function() {
+            ui.tab.data('loaded', true);
+          });
+          $(ui.panel).html('Loading...');
+          ui.jqXHR.fail(function(jqXHR, textStatus, errorThrown) {
+            ui.panel.html('Error loading the tab: ' + errorThrown);
+          });
         }
-        ui.jqXHR.success(function() {
-          ui.tab.data('loaded', true);
-        });
-        $(ui.panel).html('Loading...');
-        ui.jqXHR.fail(function(jqXHR, textStatus, errorThrown) {
-          ui.panel.html('Error loading the tab: ' + errorThrown);
-        });
-      }
-    });
+      });
       $(this).tabs(options);
     });
+  }
 
+  $(function() {
     if ($().on) { // newer jQueries
+      $(document).on('jqr.load', ujsLoadPlugins);
       $(document).on('click', '.ujs-dialog', ujsDialogClick);
       $(document).on('click', '.ujs-dialog-close, .ujs-dialog-x',
           ujsDialogCloseClick);
@@ -221,6 +228,7 @@
       $(document).on('click', '[data-ujs-confirm=true]', ujsConfirmClick);
     }
     else {
+      $(document).live('jrq.load', ujsLoadPlugins);
       $('.ujs-dialog').live('click', ujsDialogClick);
       $('.ujs-dialog-close, .ujs-dialog-x').live('click', ujsDialogCloseClick);
       $('.ujs-ajax').live('ajax:beforeSend', ujsAjaxBeforeSend);
@@ -228,6 +236,7 @@
       $('.ujs-ajax').live('ajax:error', ujsAjaxError);
       $('[data-ujs-confirm=true]').live('click', ujsConfirmClick);
     }
+    $('body').trigger('jqr.load');
 
   });
 

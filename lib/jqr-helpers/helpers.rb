@@ -266,6 +266,22 @@ module JqrHelpers
       end
     end
 
+    # Create a date picker field. The attributes given are passed to
+    # text_field_tag. Note that Ruby and jQuery date formats are different.
+    # You will need to format the "value" parameter to match whatever format you
+    # are passing into the "options" parameter.
+    # @param name [String] the name of the form element.
+    # @param value [Date] the initial value.
+    # @param options [Hash] options to be passed to datepicker().
+    # @param html_options [Hash] options to be passed to text_field_tag.
+    # @return [String]
+    def date_picker_tag(name, value, options={}, html_options={})
+      html_options[:'data-date-options'] = options.to_json
+      html_options[:class] ||= ''
+      html_options[:class] << ' ujs-date-picker'
+      text_field_tag(name, value, html_options)
+    end
+
     private
 
     # Process options related to Ajax requests (e.g. button_to_ajax).

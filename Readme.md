@@ -44,7 +44,8 @@ the dialog content from a remote route)
 * `button_to_ajax` - send an Ajax request when a button is clicked
 * `form_tag_ajax` - send an Ajax request when a form is submitted
 * `form_for_ajax` - ditto but using Rails's `form_for` helper
-* `tab_container` - create a tab container.
+* `tab_container` - create a tab container
+* `date_picker_tag` - create a date picker
 
 There are two sets of options that recur throughout the methods here:
 
@@ -131,7 +132,7 @@ This allows you to loop through the tabs in an intuitive and concise way.
 There are two special events triggered by jqr-helpers:
 
 * `jqr.load` - this is triggered when a remote call populates an element with
-data. The scope for the callback is the element which has just had data
+data. The target for the event is the element which has just had data
 populated.
 * `jqr.beforedialogopen` - for remote dialogs, this is triggered when the
 link or button is clicked to open the dialog but before the request is sent out.
