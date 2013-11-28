@@ -34,7 +34,7 @@ into your public folders:
 
 ## Helper Methods ##
 
-Full documentation can be found [here](doc/JqrHelpers/Helpers.html).
+Full documentation can be found [here](https://rawgithub.com/wishabi/jqr-helpers/master/doc/JqrHelpers/Helpers.html).
 
 * `link_to_dialog` - open a dialog when a link is clicked
 * `button_to_dialog` - open a dialog when a button is clicked
