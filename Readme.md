@@ -34,6 +34,8 @@ into your public folders:
 
 ## Helper Methods ##
 
+Full documentation can be found [here](doc/JqrHelpers/Helpers.html).
+
 * `link_to_dialog` - open a dialog when a link is clicked
 * `button_to_dialog` - open a dialog when a button is clicked
 * `confirm_button` - open a nice jQuery confirm dialog (rather than a built-in browser one)

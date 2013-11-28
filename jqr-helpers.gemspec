@@ -18,5 +18,6 @@ EOF
   s.license       = 'MIT'
 
   s.add_dependency 'rails', '>= 3.0'
+  s.add_development_dependency 'yard'
 
 end
