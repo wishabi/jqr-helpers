@@ -1,3 +1,5 @@
+require 'securerandom'
+
 module JqrHelpers
   module Helpers
 
@@ -27,7 +29,7 @@ module JqrHelpers
         else
           options = url_or_options
           content = yield
-          id = (0...8).map { (65 + rand(26)).chr }.join # random string
+          id = _random_string
           url = '#' + id
         end
         options.merge!(:id => id)
@@ -119,9 +121,6 @@ module JqrHelpers
     # using content already on the page.
     # If a block is given, dialog_options and html_options are shifted left by
     # 1 and the block is used as the html_content.
-    # @param id [String] A unique ID to use to reference the dialog options.
-    #  This is ultimately created as an element with that ID in the DOM,
-    #  but the element does not have to exist already, unlike link_to_dialog.
     # @param url [String] The URL to load the content from.
     # @param html_content [String] Text or HTML tags to use as the link body.
     # @param dialog_options [Hash] See above.
@@ -129,7 +128,7 @@ module JqrHelpers
     #  a special :tag_name option that can be used to change the tag being
     #  created. Default is :a, but you can pass :div, :span, etc.
     # @return [String]
-    def link_to_remote_dialog(id, url, html_content, dialog_options={},
+    def link_to_remote_dialog(url, html_content, dialog_options={},
       html_options={}, &block)
 
       if block_given?
@@ -139,22 +138,19 @@ module JqrHelpers
       end
 
       html_options[:'data-dialog-url'] = url
-      link_to_dialog(id, html_content, dialog_options, html_options)
+      link_to_dialog(_random_string, html_content, dialog_options, html_options)
     end
 
     # Same as button_to_dialog, but loads content from a remote URL instead of
     # using content already on the page.
-    # @param id [String] A unique ID to use to reference the dialog options.
-    #  This is ultimately created as an element with that ID in the DOM,
-    #  but the element does not have to exist already, unlike button_to_dialog.
     # @param url [String] The URL to load the content from.
     # @param html_content [String] Text or HTML tags to use as the button body.
     # @param dialog_options [Hash] See above.
     # @param html_options [Hash] Attributes to put on the button tag.
     # @return [String]
-    def button_to_remote_dialog(id, url, html_content, dialog_options={},
+    def button_to_remote_dialog(url, html_content, dialog_options={},
       html_options={})
-      link_to_remote_dialog(id, url, html_content, dialog_options,
+      link_to_remote_dialog(url, html_content, dialog_options,
                      html_options.merge(:tag_name => 'button'))
     end
 
@@ -283,6 +279,12 @@ module JqrHelpers
     end
 
     private
+
+    # Generate a random string for IDs.
+    # @return [String]
+    def _random_string
+      SecureRandom.hex(16)
+    end
 
     # Process options related to Ajax requests (e.g. button_to_ajax).
     # @param options [Hash]

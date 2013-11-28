@@ -85,6 +85,9 @@
       if (dialogElement.length == 0) {
         $('body').append("<div id='" + dialogID + "'>");
         dialogElement = $('#' + dialogID);
+        if ($(this).data('close-x')) {
+          dialogElement.prepend('<span class="ujs-dialog-x"></span>');
+        }
       }
       dialogElement.load(url, function() {
         $('.ui-widget-overlay').remove();
