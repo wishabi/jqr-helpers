@@ -263,15 +263,18 @@ module JqrHelpers
     end
 
     # Create a date picker field. The attributes given are passed to
-    # text_field_tag. Note that Ruby and jQuery date formats are different.
-    # You will need to format the "value" parameter to match whatever format you
-    # are passing into the "options" parameter.
+    # text_field_tag. There is a special option :format - this expects a
+    # *Ruby* style date format. It will format both the initial display of the
+    # date and the jQuery date format to be the same.
     # @param name [String] the name of the form element.
     # @param value [Date] the initial value.
     # @param options [Hash] options to be passed to datepicker().
     # @param html_options [Hash] options to be passed to text_field_tag.
     # @return [String]
-    def date_picker_tag(name, value, options={}, html_options={})
+    def date_picker_tag(name, value=Date.today, options={}, html_options={})
+      format = options.delete(:format) || '%Y-%m-%d'
+      value = value.strftime(format)
+      options[:dateFormat] = _map_date(format)
       html_options[:'data-date-options'] = options.to_json
       html_options[:class] ||= ''
       html_options[:class] << ' ujs-date-picker'
@@ -279,6 +282,48 @@ module JqrHelpers
     end
 
     private
+
+    # @param format [String] the Rails date format to map
+    # @return [String] the jQuery date format
+    def _map_date(format)
+      format.gsub!(/'/, "''")
+      format_map = {
+        '%Y' => 'yy',
+        '%y' => 'y',
+        '%-d' => 'd',
+        '%d' => 'dd',
+        '%j' => 'oo',
+        '%a' => 'D',
+        '%A' => 'DD',
+        '%-m' => 'm',
+        '%m' => 'mm',
+        '%b' => 'M',
+        '%B' => 'MM'
+      }
+      prev_index = 0
+      while true do
+        format_expr = ''
+        percent = format.index('%')
+        break if !percent
+        puts "% is #{percent} prev is #{prev_index} format is #{format}"
+        if percent > prev_index
+          format.insert(percent, "'")
+          format.insert(prev_index, "'")
+          percent += 2
+        end
+        length = 2
+        next_char = format[percent + 1]
+        if next_char == '-'
+          length += 1
+        end
+        format_expr = format[percent, length]
+        new_format_expr = format_map[format_expr]
+        format[percent, length] = new_format_expr
+        prev_index = percent + new_format_expr.length
+      end
+      format
+
+    end
 
     # Generate a random string for IDs.
     # @return [String]
