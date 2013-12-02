@@ -109,7 +109,16 @@
   }
 
   function ujsAjaxBeforeSend() {
-    showThrobber(this);
+    if ($j(this).is('form')) {
+      var submit = $j('input[type=submit]', this);
+      if (submit.length)
+        showThrobber(submit);
+      else
+        showThrobber(this);
+    }
+    else {
+      showThrobber(this);
+    }
     var disableElement = $(this);
     if ($(this).is('form'))
       disableElement = $('button, input[type=submit]', this).first();
