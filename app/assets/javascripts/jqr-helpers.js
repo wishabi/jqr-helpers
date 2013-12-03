@@ -207,6 +207,9 @@
       var options = $(this).data('date-options');
       $(this).datepicker(options);
     });
+    $('.ujs-button-set', event.target).each(function() {
+      $(this).buttonset();
+    });
     $('.ujs-tab-container', event.target).each(function() {
       var options = $(this).data('tab-options');
       options = $.extend(options, {
@@ -240,7 +243,7 @@
       $(document).on('click', '[data-ujs-confirm=true]', ujsConfirmClick);
     }
     else {
-      $(document).live('jrq.load', ujsLoadPlugins);
+      $('body').live('jqr.load', ujsLoadPlugins);
       $('.ujs-dialog').live('click', ujsDialogClick);
       $('.ujs-dialog-close, .ujs-dialog-x').live('click', ujsDialogCloseClick);
       $('.ujs-ajax').live('ajax:beforeSend', ujsAjaxBeforeSend);

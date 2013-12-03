@@ -281,6 +281,23 @@ module JqrHelpers
       text_field_tag(name, value, html_options)
     end
 
+    # Print a button set. Each button will be a radio button, and the group
+    # will then be passed into jQuery's buttonset() method.
+    # @param name [String] the name of the form element.
+    # @param values [Hash<String, String>] a hash of value => label.
+    # @param selected [String] the selected value, if any.
+    # @param html_options [Hash] a set of options that will be passed into
+    #   the parent div tag.
+    def buttonset(name, values, selected=nil, html_options={})
+      html_options[:class] ||= ''
+      html_options[:class] << ' ujs-button-set'
+      content = values.inject('') do |sum, (value, label)|
+        sum += radio_button_tag(name, value, selected == value) +
+          label_tag("#{name}_#{value}", label)
+      end
+      content_tag(:div, raw(content), html_options)
+    end
+
     private
 
     # @param format [String] the Rails date format to map

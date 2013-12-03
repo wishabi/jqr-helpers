@@ -48,6 +48,7 @@ the dialog content from a remote route)
 * `form_for_ajax` - ditto but using Rails's `form_for` helper
 * `tab_container` - create a tab container
 * `date_picker_tag` - create a date picker
+* `buttonset` - create a radio button set
 
 There are two sets of options that recur throughout the methods here:
 
