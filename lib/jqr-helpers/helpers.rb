@@ -29,7 +29,7 @@ module JqrHelpers
         else
           options = url_or_options
           content = yield
-          id = _random_string
+          id = Helpers._random_string
           url = '#' + id
         end
         options.merge!(:id => id)
@@ -138,7 +138,8 @@ module JqrHelpers
       end
 
       html_options[:'data-dialog-url'] = url
-      link_to_dialog(_random_string, html_content, dialog_options, html_options)
+      link_to_dialog(Helpers._random_string, html_content,
+                     dialog_options, html_options)
     end
 
     # Same as button_to_dialog, but loads content from a remote URL instead of
@@ -298,6 +299,12 @@ module JqrHelpers
       content_tag(:div, raw(content), html_options)
     end
 
+    # Generate a random string for IDs.
+    # @return [String]
+    def self._random_string
+      SecureRandom.hex(16)
+    end
+
     private
 
     # @param format [String] the Rails date format to map
@@ -340,12 +347,6 @@ module JqrHelpers
       end
       format
 
-    end
-
-    # Generate a random string for IDs.
-    # @return [String]
-    def _random_string
-      SecureRandom.hex(16)
     end
 
     # Process options related to Ajax requests (e.g. button_to_ajax).
