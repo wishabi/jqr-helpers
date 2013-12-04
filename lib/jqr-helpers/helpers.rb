@@ -176,19 +176,25 @@ module JqrHelpers
       link_to body, url, options
     end
 
-    # Create a button that fires off a jQuery Ajax request. This is basically
-    # a wrapper around button_to :remote => true.
+    # Create a button that fires off a jQuery Ajax request. This does not use
+    # button_to, so it can be used inside forms.
     # @param body [String] the text/content that goes inside the tag.
     # @param url [String] the URL to connect to.
     # @param options [Hash] Ajax options - see above.
     # @return [String]
     def button_to_ajax(body, url, options={})
 
-      options[:remote] = true
-      options[:form] ||= {}
-      options[:form].merge!(_process_ajax_options(options))
+      # Specifically do not add data-remote
+      options[:'data-method'] = options.delete(:method)
+      options[:'class'] ||= ''
+      options[:'class'] << ' ujs-ajax-button'
+      options[:'data-url'] = url
+      if options.key?(:confirm)
+        options[:'data-confirm'] = options.delete(:confirm)
+      end
+      options.merge!(_process_ajax_options(options))
 
-      button_to body, url, options
+      content_tag :button, body, options
     end
 
     # Create a form tag that submits to an Ajax request. Basically a wrapper for

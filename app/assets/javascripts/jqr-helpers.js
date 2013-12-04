@@ -108,30 +108,65 @@
     return false;
   }
 
+  function ujsButtonClick(event) {
+    var element = $(this);
+    element.uniqueId(); // to store for later
+    if ($.rails.allowAction(element)) {
+      // largely copied from rails_jquery.js
+      var href = element.data('url');
+      var method = element.data('method');
+      var csrf_token = $('meta[name=csrf-token]').attr('content');
+      var csrf_param = $('meta[name=csrf-param]').attr('content');
+      var form = $('<form method="post" action="' + href + '"></form>');
+      var metadata_input =
+          '<input name="_method" value="' + method + '" type="hidden" />';
+
+      if (csrf_param !== undefined && csrf_token !== undefined) {
+        metadata_input += '<input name="' + csrf_param + '" value="' +
+            csrf_token + '" type="hidden" />';
+      }
+
+      form.hide().append(metadata_input).appendTo('body');
+      $(form).data(element.data()); // copy to form
+      $(form).data('remote', true);
+      $(form).addClass('ujs-ajax');
+      $(form).data('real-element', element.attr('id'));
+      form.submit();
+    }
+    event.preventDefault();
+    return false;
+  }
+
   function ujsAjaxBeforeSend() {
-    if ($j(this).is('form')) {
-      var submit = $j('input[type=submit]', this);
+    var element = $(this);
+    if (element.data('real-element')) {
+      element = $('#' + element.data('real-element'));
+    }
+    if (element.is('form')) {
+      var submit = $('input[type=submit]', element);
       if (submit.length)
         showThrobber(submit);
       else
-        showThrobber(this);
+        showThrobber(element);
     }
     else {
-      showThrobber(this);
+      showThrobber(element);
     }
-    var disableElement = $(this);
-    if ($(this).is('form'))
-      disableElement = $('button, input[type=submit]', this).first();
-    disableElement.attr('disabled', 'disabled');
+    if (element.is('form'))
+      element = $('button, input[type=submit]', element).first();
+    element.attr('disabled', 'disabled');
   }
 
   function ujsAjaxSuccess(evt, data, status, xhr) {
-    hideThrobber(this);
-    var disableElement = $(this);
-    if ($(this).is('form'))
-      disableElement = $('button, input[type=submit]', this).first();
-    disableElement.attr('disabled', false);
     var element = $(this);
+    if (element.data('real-element')) {
+      element = $('#' + element.data('real-element'));
+    }
+    hideThrobber(element);
+    var disableElement = element;
+    if (element.is('form'))
+      disableElement = $('button, input[type=submit]', element).first();
+    disableElement.attr('disabled', false);
     var targetElement = element;
     // if this was sent from a dialog, close the dialog and look at the
     // element that opened it for update/append/delete callbacks.
@@ -164,7 +199,7 @@
           target.trigger('jqr.load');
           break;
         case 'delete':
-          target.remove();
+          target.fadeOut(500, function() {$(this).remove()});
           break;
       }
       target.effect('highlight');
@@ -207,6 +242,7 @@
       var options = $(this).data('date-options');
       $(this).datepicker(options);
     });
+
     $('.ujs-button-set', event.target).each(function() {
       $(this).buttonset();
     });
@@ -237,6 +273,7 @@
       $(document).on('click', '.ujs-dialog', ujsDialogClick);
       $(document).on('click', '.ujs-dialog-close, .ujs-dialog-x',
           ujsDialogCloseClick);
+      $(document).on('click', '.ujs-ajax-button', ujsButtonClick);
       $(document).on('ajax:beforeSend', '.ujs-ajax', ujsAjaxBeforeSend);
       $(document).on('ajax:success', '.ujs-ajax', ujsAjaxSuccess);
       $(document).on('ajax:error', '.ujs-ajax', ujsAjaxError);
@@ -246,6 +283,7 @@
       $('body').live('jqr.load', ujsLoadPlugins);
       $('.ujs-dialog').live('click', ujsDialogClick);
       $('.ujs-dialog-close, .ujs-dialog-x').live('click', ujsDialogCloseClick);
+      $('.ujs-ajax-button').live('click', ujsButtonClick);
       $('.ujs-ajax').live('ajax:beforeSend', ujsAjaxBeforeSend);
       $('.ujs-ajax').live('ajax:success', ujsAjaxSuccess);
       $('.ujs-ajax').live('ajax:error', ujsAjaxError);
