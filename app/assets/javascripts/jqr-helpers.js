@@ -142,18 +142,9 @@
     if (element.data('real-element')) {
       element = $('#' + element.data('real-element'));
     }
-    if (element.is('form')) {
-      var submit = $('input[type=submit]', element);
-      if (submit.length)
-        showThrobber(submit);
-      else
-        showThrobber(element);
-    }
-    else {
-      showThrobber(element);
-    }
     if (element.is('form'))
       element = $('button, input[type=submit]', element).first();
+    showThrobber(element);
     element.attr('disabled', 'disabled');
   }
 
@@ -162,11 +153,11 @@
     if (element.data('real-element')) {
       element = $('#' + element.data('real-element'));
     }
-    hideThrobber(element);
     var disableElement = element;
     if (element.is('form'))
       disableElement = $('button, input[type=submit]', element).first();
     disableElement.attr('disabled', false);
+    hideThrobber(disableElement);
     var targetElement = element;
     // if this was sent from a dialog, close the dialog and look at the
     // element that opened it for update/append/delete callbacks.
