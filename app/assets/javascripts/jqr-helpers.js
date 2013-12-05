@@ -5,11 +5,12 @@
   }
 
   function hideThrobber(element) {
-    $(element).next().remove();
+    $(element).nextAll('.throbber').remove();
     $(element).removeAttr('disabled');
   }
 
   var ujsDialogElement = null; // the element that opened the dialog
+  var ujsSubmitElement = null; // the element that submitted a form
 
   // called from dialog button value
   function ujsSubmitDialogForm() {
@@ -108,6 +109,10 @@
     return false;
   }
 
+  function ujsSubmitClick(event) {
+    ujsSubmitElement = event.target;
+  }
+
   function ujsButtonClick(event) {
     var element = $(this);
     element.uniqueId(); // to store for later
@@ -142,10 +147,10 @@
     if (element.data('real-element')) {
       element = $('#' + element.data('real-element'));
     }
-    if (element.is('form'))
-      element = $('button, input[type=submit]', element).first();
+    if (element.is('form') &&
+        $(ujsSubmitElement).parents('form').index(element) >= 0)
+      element = ujsSubmitElement;
     showThrobber(element);
-    element.attr('disabled', 'disabled');
   }
 
   function ujsAjaxSuccess(evt, data, status, xhr) {
@@ -154,9 +159,9 @@
       element = $('#' + element.data('real-element'));
     }
     var disableElement = element;
-    if (element.is('form'))
-      disableElement = $('button, input[type=submit]', element).first();
-    disableElement.attr('disabled', false);
+    if (element.is('form') &&
+        $(ujsSubmitElement).parents('form').index(element) >= 0)
+      disableElement = ujsSubmitElement;
     hideThrobber(disableElement);
     var targetElement = element;
     // if this was sent from a dialog, close the dialog and look at the
@@ -171,7 +176,7 @@
       var callback = eval(element.data('callback'));
       callback.call(targetElement, data);
     }
-    if (data && data.trim().charAt(0) != '<' && data != 'success') {
+    else if (data && data.trim().charAt(0) != '<' && data != 'success') {
       alert(data);
       return;
     }
@@ -261,6 +266,7 @@
   $(function() {
     if ($().on) { // newer jQueries
       $(document).on('jqr.load', ujsLoadPlugins);
+      $(document).on('click', 'input[type=submit]', ujsSubmitClick);
       $(document).on('click', '.ujs-dialog', ujsDialogClick);
       $(document).on('click', '.ujs-dialog-close, .ujs-dialog-x',
           ujsDialogCloseClick);
@@ -272,6 +278,7 @@
     }
     else {
       $('body').live('jqr.load', ujsLoadPlugins);
+      $('input[type=submit]').live('click', ujsSubmitClick);
       $('.ujs-dialog').live('click', ujsDialogClick);
       $('.ujs-dialog-close, .ujs-dialog-x').live('click', ujsDialogCloseClick);
       $('.ujs-ajax-button').live('click', ujsButtonClick);
@@ -281,6 +288,15 @@
       $('[data-ujs-confirm=true]').live('click', ujsConfirmClick);
     }
     $('body').trigger('jqr.load');
+
+    // Derived from
+    // https://makandracards.com/makandra/3877-re-enable-submit-buttons-disabled-by-the-disabled_with-option
+    $(window).unload(function() {
+      $.rails.enableFormElements($($.rails.formSubmitSelector));
+      $('.ujs-ajax[disabled]').prop('disabled', false);
+      $(ujsSubmitElement).prop('disabled', false);
+      $(ujsDialogElement).prop('disabled', false);
+    });
 
   });
 
