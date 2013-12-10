@@ -48,11 +48,13 @@
     if ($(this).data('close-x')) {
       dialogElement.prepend('<span class="ujs-dialog-x"></span>');
     }
+    var url = $(this).data('dialog-url');
     var dialogOptions = $(this).data('dialog-options');
     var open = dialogOptions['open'];
     dialogOptions = $.extend(dialogOptions, {
       'close': function() {
         $(this).dialog('destroy').addClass('ujs-dialog-hidden');
+        if (url) $(this).remove();
       },
       'open': function() {
         ujsDialogOpen.call(this);
@@ -78,7 +80,6 @@
         }
       });
     }
-    var url = $(this).data('dialog-url');
     if (url) {
       $(this).trigger('jqr.beforedialogopen');
       $(document.body).append('<div class="ui-widget-overlay ui-front">');
