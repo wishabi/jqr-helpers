@@ -293,9 +293,7 @@
     // https://makandracards.com/makandra/3877-re-enable-submit-buttons-disabled-by-the-disabled_with-option
     $(window).unload(function() {
       $.rails.enableFormElements($($.rails.formSubmitSelector));
-      $('.ujs-ajax[disabled]').prop('disabled', false);
-      $(ujsSubmitElement).prop('disabled', false);
-      $(ujsDialogElement).prop('disabled', false);
+      $('input[disabled],button[disabled],select[disabled]').prop('disabled', false);
     });
 
   });
