@@ -117,6 +117,7 @@
   function ujsButtonClick(event) {
     var element = $(this);
     element.uniqueId(); // to store for later
+    element.data('confirm', null); // we've already fired it
     if ($.rails.allowAction(element)) {
       // largely copied from rails_jquery.js
       var href = element.data('url');
