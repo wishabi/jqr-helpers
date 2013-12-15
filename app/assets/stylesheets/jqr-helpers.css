@@ -19,3 +19,7 @@
 .ujs-dialog-hidden {
     display: none;
 }
+
+form.ujs-ajax {
+    display: inline;
+}
