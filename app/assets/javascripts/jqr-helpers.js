@@ -123,8 +123,8 @@
   function ujsButtonClick(event) {
     var element = $(this);
     element.uniqueId(); // to store for later
-    element.data('confirm', null); // we've already fired it
     if ($.rails.allowAction(element)) {
+      element.data('confirm', null); // we've already fired it
       // largely copied from rails_jquery.js
       var href = element.data('url');
       var method = element.data('method');
