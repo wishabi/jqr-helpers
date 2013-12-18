@@ -49,7 +49,7 @@ module JqrHelpers
     # 1 and the block is used as the html_content.
     # @param dialog_id [String] The ID of the element to put in the dialog.
     # @param html_content [String] Text or HTML tags to use as the link body.
-    # @param dialog_options [Hash] See above.
+    # @param dialog_options [Hash] Dialog options as described in the readme.
     # @param html_options [Hash] Attributes to put on the link tag. There is
     #  a special :tag_name option that can be used to change the tag being
     #  created. Default is :a, but you can pass :div, :span, etc.
@@ -95,7 +95,7 @@ module JqrHelpers
     # @param dialog_id [String] The ID of the element to put in the dialog.
     # @param html_content [String] Text or HTML tags to use as the button body.
     # @param html_options [Hash] Attributes to put on the button tag.
-    # @param dialog_options [Hash] See above.
+    # @param dialog_options [Hash] Dialog options as described in the readme.
     # @return [String]
     def button_to_dialog(dialog_id, html_content, dialog_options={},
       html_options={})
@@ -123,7 +123,7 @@ module JqrHelpers
     # 1 and the block is used as the html_content.
     # @param url [String] The URL to load the content from.
     # @param html_content [String] Text or HTML tags to use as the link body.
-    # @param dialog_options [Hash] See above.
+    # @param dialog_options [Hash] Dialog options as described in the readme.
     # @param html_options [Hash] Attributes to put on the link tag. There is
     #  a special :tag_name option that can be used to change the tag being
     #  created. Default is :a, but you can pass :div, :span, etc.
@@ -146,7 +146,7 @@ module JqrHelpers
     # using content already on the page.
     # @param url [String] The URL to load the content from.
     # @param html_content [String] Text or HTML tags to use as the button body.
-    # @param dialog_options [Hash] See above.
+    # @param dialog_options [Hash] Dialog options as described in the readme.
     # @param html_options [Hash] Attributes to put on the button tag.
     # @return [String]
     def button_to_remote_dialog(url, html_content, dialog_options={},

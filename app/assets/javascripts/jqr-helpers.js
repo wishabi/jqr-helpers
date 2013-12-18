@@ -50,6 +50,7 @@
     }
     var url = $(this).data('dialog-url');
     var dialogOptions = $(this).data('dialog-options');
+    var data = dialogOptions['data'];
     var open = dialogOptions['open'];
     dialogOptions = $.extend(dialogOptions, {
       'close': function() {
@@ -61,6 +62,11 @@
         if (open) {
           var openFunc = eval(open);
           openFunc.call(this);
+        }
+        if (data) {
+          for (var n in data) {
+            dialogElement.find('[name=' + n + ']').val(data[n]);
+          }
         }
       }
     });

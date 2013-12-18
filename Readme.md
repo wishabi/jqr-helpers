@@ -78,6 +78,13 @@ button.
 Another option is `:close_x => true` - this will print a green X at the top
 right of the dialog. Generally this is used when `:title => false`.
 
+Another option is `:data` - this accepts a hash of string/value pairs. When this
+is given, jqr-helpers will search the dialog for input fields whose names
+match the keys and populate them with the values. This is helpful when you want
+to pass data to a local dialog but don't want to mess around with saving data
+attributes and callbacks. When using a remote dialog it's easier to just pass
+the data into the URL and have Rails populate it on the server side.
+
 Note about dialog ID - you can always pass in the special value `:next` for
 this. This will use whatever element is just after the clicked element
 for the dialog contents. This can be useful for printing simple dialogs inside a
