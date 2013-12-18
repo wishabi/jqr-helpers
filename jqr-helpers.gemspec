@@ -5,11 +5,10 @@ Gem::Specification.new do |s|
   s.date         = '2013-12-18'
   s.summary      = 'Helpers to print unobtrusive jQuery-UI tags.'
   s.description  = <<-EOF
-    This gem allows the use of several helper methods.
-    The tags output contain classes and data attributes that are grabbed by
-    unobtrusive JavaScript code and turned into jQuery UI widgets.
-    Helpers include Ajax requests to update elements on the page, dialogs
-    (including remote dialogs), and tab containers.
+    This gem adds helper methods to create unobtrusive jQuery code. It outputs
+    HTML, which is hooked by an included JavaScript file to provide the
+    functionality. Helpers include links to Ajax requests to update elements on
+    the page, dialogs (including remote dialogs), date pickers and tab containers.
 EOF
   s.authors      = ['Daniel Orner']
   s.email        = 'daniel.orner@wishabi.com'
