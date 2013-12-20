@@ -27,7 +27,7 @@
     if ($(this).parent().height() > $(window).height()) {
       $(this).height($(window).height() * 0.8);
       $(this).parent().css('top',
-          ($(window).height() - $(this).parent().height()) / 2
+          Math.max(($(window).height() - $(this).parent().height()) / 2, 1)
       );
       $(this).css('overflow-y', 'auto');
     }
@@ -83,6 +83,9 @@
         }
         else if (element.click == 'close') {
           dialogOptions.buttons[index].click = ujsDialogClose;
+        }
+        else {
+          dialogOptions.buttons[index] = eval(element);
         }
       });
     }

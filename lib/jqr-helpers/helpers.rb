@@ -71,11 +71,12 @@ module JqrHelpers
       tag_name = html_options.delete(:tag_name) || :a
       html_options[:href] = '#' if tag_name == :a
 
+      dialog_options[:dialogClass] ||= ''
       if dialog_options[:title] == false # not nil or blank
-        dialog_options[:dialogClass] ||= ''
         dialog_options[:dialogClass] << ' ujs-dialog-modal no-title'
       else
         dialog_options[:title] ||= 'Dialog'
+        dialog_options[:dialogClass] << ' ujs-dialog-modal'
       end
       dialog_options[:modal] = true
       dialog_options[:width] ||= 'auto'
