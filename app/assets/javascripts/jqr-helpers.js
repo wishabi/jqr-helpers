@@ -93,14 +93,15 @@
       $(this).trigger('jqr.beforedialogopen');
       $(document.body).append('<div class="ui-widget-overlay ui-front">');
       $(document.body).append('<div id="remote-dialog-throbber">');
+      var closeX = $(this).data('close-x');
       if (dialogElement.length == 0) {
         $('body').append("<div id='" + dialogID + "'>");
         dialogElement = $('#' + dialogID);
-        if ($(this).data('close-x')) {
-          dialogElement.prepend('<span class="ujs-dialog-x"></span>');
-        }
       }
       dialogElement.load(url, function() {
+        if (closeX) {
+          dialogElement.prepend('<span class="ujs-dialog-x"></span>');
+        }
         $('.ui-widget-overlay').remove();
         $('#remote-dialog-throbber').remove();
         $(this).dialog(dialogOptions);
