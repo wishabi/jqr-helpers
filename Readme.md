@@ -115,6 +115,8 @@ Other Ajax options:
 * `:callback` (String) - the name of a JS function to call on completion.
 The function will be in the scope of the original element, and
 will be passed the result data of the Ajax request.
+* `:refresh` (Boolean) - refresh the current page when the call is completed.
+This will cause `:update, :append, :delete,` and `:callback` to be ignored.
 * `:use_dialog_opener` (Boolean) - if the Ajax request is sent from inside
 a dialog, this indicates that the update/append/delete options should
 look at the element that opened the dialog rather than the element that

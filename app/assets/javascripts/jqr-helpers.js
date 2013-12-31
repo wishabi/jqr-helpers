@@ -24,6 +24,7 @@
   }
 
   function ujsDialogOpen() {
+    $(this).css('maxHeight', ($(window).height() * 0.8) + 'px');
     if ($(this).parent().height() > $(window).height()) {
       $(this).height($(window).height() * 0.8);
       $(this).parent().css('top',
@@ -183,6 +184,10 @@
         targetElement = ujsDialogElement;
       if (element.data('close-dialog'))
         ujsDialogClose();
+    }
+    if (element.data('refresh')) {
+      window.location.reload();
+      return;
     }
     if (element.data('callback')) {
       var callback = eval(element.data('callback'));

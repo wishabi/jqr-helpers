@@ -111,7 +111,7 @@ module JqrHelpers
     # @param url [String] the URL which the button should go to if confirmed
     # @param message [String] the confirm message to prompt
     # @param html_options [Hash] HTML attributes.
-    def confirm_button(html_content, url, message, html_options)
+    def confirm_button(html_content, url, message, html_options={})
       button_to html_content, url, html_options.merge(
         :'data-message' => simple_format(message), # turn text into HTML
         :'data-ujs-confirm' => true
@@ -367,6 +367,7 @@ module JqrHelpers
       new_options[:'data-callback'] = options.delete(:callback)
       new_options[:'data-close-dialog'] = options.delete(:close_dialog)
       new_options[:'data-use-dialog-opener'] = options.delete(:use_dialog_opener)
+      new_options[:'data-refresh'] = true if options.delete(:refresh)
 
       [:update, :append, :delete].each do |result_method|
         selector = options.delete(result_method)
