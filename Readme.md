@@ -49,6 +49,8 @@ the dialog content from a remote route)
 * `tab_container` - create a tab container
 * `date_picker_tag` - create a date picker
 * `buttonset` - create a radio button set
+* `will_paginate_ajax` - create a will_paginate interface that uses Ajax to
+replace the paginated contents.
 
 There are two sets of options that recur throughout the methods here:
 
@@ -57,35 +59,35 @@ There are two sets of options that recur throughout the methods here:
 These are parameters to pass to the `jQuery.dialog()` function.
 See <http://api.jqueryui.com/dialog/>.
 
-An extra custom option is `:title` - setting it to `false` will hide the
-title bar.
+Additional or changed options:
 
-Another thing to note is the special values for buttons. Usually the buttons
-must have JavaScript callbacks, but 99% of the time you want the classic
-OK and Cancel buttons. Passing `submit` and `close` as the values
-of the buttons (or the values of the "click" attribute of the buttons)
-will do just that - submit the form inside the dialog or close it.
+* `:title` - setting this to `false` will hide the title bar.
+* `:buttons`: Usually the buttons must have JavaScript callbacks, but 99% of the
+time you want the classic OK and Cancel buttons. Passing `submit` and `close`
+as the values of the buttons (or the values of the "click" attribute of the
+buttons) will do just that - submit the form inside the dialog or close it.
 
 Example:
 
     button_to_dialog('my-dialog-id', 'Open Dialog', :buttons =>
       {'OK' => 'submit', 'Cancel' => 'close'})
 
-You can also use a special option, `:default_buttons => true`, as a shortcut
-to the above buttons, since it's so common to have an OK and Cancel
-button.
-
-Another option is `:close_x => true` - this will print a green X at the top
+* `:default_buttons`: This is a special option which acts as a shortcut
+to the above example, since it's so common to have an OK and Cancel button.
+* `:close_x => true`: this will print a green X at the top
 right of the dialog. Generally this is used when `:title => false`.
-
-Another option is `:data` - this accepts a hash of string/value pairs. When this
+*`:data`: this accepts a hash of string/value pairs. When this
 is given, jqr-helpers will search the dialog for input fields whose names
 match the keys and populate them with the values. This is helpful when you want
 to pass data to a local dialog but don't want to mess around with saving data
 attributes and callbacks. When using a remote dialog it's easier to just pass
 the data into the URL and have Rails populate it on the server side.
+*`:throbber`: For remote dialogs only. This can be `:small`, `:large`, or
+`:none`. By default it is `:large`, indicating a throbber that goes in front
+of the screen. `:small` would be a small inline throbber next to the button or
+link that called the dialog, and `:none` shows no throbber at all.
 
-Note about dialog ID - you can always pass in the special value `:next` for
+A note about dialog ID - you can always pass in the special value `:next` for
 this. This will use whatever element is just after the clicked element
 for the dialog contents. This can be useful for printing simple dialogs inside a
 foreach loop that shouldn't require a totally separate route + view.
@@ -126,6 +128,13 @@ other elements.
 this indicates that the dialog should be closed when the request completes
 successfully. This is true by default for forms and false for
 other elements.
+* `:scroll_to` (Boolean) - if given, the element that was updated or inserted
+will be scrolled into view (i.e. its top will be aligned with the top of the
+page).
+*`:throbber` (String) - This can be `:small`, `:large`, or
+`:none`. By default it is `:small`, indicating a throbber that goes in front
+of the screen. `:small` would be a small inline throbber next to the button or
+link that called the dialog, and `:none` shows no throbber at all.
 
 ## Panel Renderers ##
 
@@ -148,6 +157,12 @@ data. The target for the event is the element which has just had data
 populated.
 * `jqr.beforedialogopen` - for remote dialogs, this is triggered when the
 link or button is clicked to open the dialog but before the request is sent out.
+
+## will_paginate ##
+
+jqr-helpers supports an Ajax version of [will_paginate](https://github.com/mislav/will_paginate).
+This replaces each link with an Ajax link and will load the content of the page
+into the supplied element.
 
 ***
 

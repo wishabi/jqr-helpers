@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name         = 'jqr-helpers'
   s.require_paths = %w(. lib lib/jqr-helpers)
-  s.version      = '1.0.18'
-  s.date         = '2013-12-31'
+  s.version      = '1.0.19'
+  s.date         = '2014-01-03'
   s.summary      = 'Helpers to print unobtrusive jQuery-UI tags.'
   s.description  = <<-EOF
     This gem adds helper methods to create unobtrusive jQuery code. It outputs
@@ -15,6 +15,7 @@ EOF
   s.files        = `git ls-files`.split($/)
   s.homepage     = 'https://github.com/wishabi/jqr-helpers'
   s.license       = 'MIT'
+  s.requirements  << 'Optionally install will_paginate to allow Ajax pagination'
 
   s.add_dependency 'rails', '>= 3.0'
   s.add_development_dependency 'yard'

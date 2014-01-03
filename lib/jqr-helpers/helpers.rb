@@ -137,6 +137,8 @@ module JqrHelpers
         dialog_options = html_content
         html_content = capture(&block)
       end
+      html_options[:'data-throbber'] =
+        dialog_options.delete(:throbber) || 'large'
 
       html_options[:'data-dialog-url'] = url
       link_to_dialog(Helpers._random_string, html_content,
@@ -312,6 +314,89 @@ module JqrHelpers
       SecureRandom.hex(16)
     end
 
+    # Only run this code if will_paginate is installed
+    begin
+      require 'will_paginate/view_helpers'
+      require 'will_paginate/view_helpers/action_view'
+
+      # Define a link renderer to use with will_paginate.
+      class AjaxLinkRenderer < WillPaginate::ActionView::LinkRenderer
+
+        # Returns the subset of +options+ this instance was initialized with
+        # that represent HTML attributes for the container element of pagination
+        # links.
+        def container_attributes
+          @container_attributes ||=
+           @options.except(*(WillPaginate::ViewHelpers.pagination_options.keys +
+              _ajax_keys + [:renderer] - [:class]))
+        end
+
+        protected
+
+        def page_number(page)
+          ajax_options = @options.slice(*_ajax_keys)
+          if page == current_page
+            tag(:em, page, :class => 'current')
+          else
+            link(page, page,
+              ajax_options.merge(:class => 'ujs-ajax', :rel => rel_value(page)))
+          end
+        end
+
+        def previous_or_next_page(page, text, classname)
+          ajax_options = @options.slice(*_ajax_keys)
+          if page
+            link(text, page,
+                 ajax_options.merge(:class => "#{classname} ujs-ajax"))
+          else
+            tag(:span, text,
+                ajax_options.merge(:class => "#{classname} disabled"))
+          end
+        end
+
+        private
+
+        # Option keys used exclusively for jqr-helpers Ajax stuff.
+        # @return [Array<Symbol>]
+        def _ajax_keys
+          [
+            :'data-type',
+            :'data-result-method',
+            :'data-selector',
+            :'data-remote',
+            :'data-scroll-to',
+            :'data-throbber'
+          ]
+        end
+
+      end
+    rescue # no will_paginate installed
+    end
+
+    # Create a will_paginate pagination interface which runs via Ajax. If
+    # will_paginate is not in the Gemfile or gem environment, this will
+    # throw an error.
+    # @param collection [Array|ActiveRecord::Relation] the
+    #     will_paginate collection.
+    # @param to_update [String] the selector to use to update the content -
+    #   either a ".class" or "#id" selector.
+    # @param options [Hash] options passed through to will_paginate
+    # @return [String]
+    def will_paginate_ajax(collection, to_update, options={})
+      if defined?(AjaxLinkRenderer)
+        options[:'data-type'] = 'html'
+        options[:'data-result-method'] = 'update'
+        options[:'data-selector'] = to_update
+        options[:'data-remote'] = true
+        options[:'data-scroll-to'] = true
+        options[:'data-throbber'] = options[:throbber] || 'large'
+        options[:renderer] = AjaxLinkRenderer
+        will_paginate(collection, options)
+      else
+        raise 'will_paginate not installed!'
+      end
+    end
+
     private
 
     # @param format [String] the Rails date format to map
@@ -368,6 +453,8 @@ module JqrHelpers
       new_options[:'data-close-dialog'] = options.delete(:close_dialog)
       new_options[:'data-use-dialog-opener'] = options.delete(:use_dialog_opener)
       new_options[:'data-refresh'] = true if options.delete(:refresh)
+      new_options[:'data-scroll-to'] = true if options.delete(:scroll_to)
+      new_options[:'data-throbber'] = options.delete(:throbber) || 'small'
 
       [:update, :append, :delete].each do |result_method|
         selector = options.delete(result_method)

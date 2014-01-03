@@ -1,11 +1,20 @@
 (function($) {
   function showThrobber(element) {
-    $(element).after("<img src='/images/jqr-helpers/throbber.gif' class='throbber'/>");
+    switch ($(element).data('throbber')) {
+      case 'none':
+        return;
+      case 'large':
+        $(document.body).append('<div id="ujs-dialog-throbber">');
+        break;
+      default: // small or not given
+        $(element).after("<img src='/images/jqr-helpers/throbber.gif' class='throbber'/>");
+    }
     $(element).attr('disabled', 'disabled');
   }
 
   function hideThrobber(element) {
     $(element).nextAll('.throbber').remove();
+    $('#ujs-dialog-throbber').remove();
     $(element).removeAttr('disabled');
   }
 
@@ -27,11 +36,13 @@
     $(this).css('maxHeight', ($(window).height() * 0.8) + 'px');
     if ($(this).parent().height() > $(window).height()) {
       $(this).height($(window).height() * 0.8);
-      $(this).parent().css('top',
-          Math.max(($(window).height() - $(this).parent().height()) / 2, 1)
-      );
       $(this).css('overflow-y', 'auto');
     }
+    $(this).parent().position({
+      my: 'center',
+      at: 'center',
+      of: $(window)
+    });
     var x = $(this).find('.ujs-dialog-x');
     if (x.length) {
       $(this).parent().append(x); // to keep it fixed to the dialog
@@ -93,7 +104,7 @@
     if (url) {
       $(this).trigger('jqr.beforedialogopen');
       $(document.body).append('<div class="ui-widget-overlay ui-front">');
-      $(document.body).append('<div id="remote-dialog-throbber">');
+      showThrobber(ujsDialogElement);
       var closeX = $(this).data('close-x');
       if (dialogElement.length == 0) {
         $('body').append("<div id='" + dialogID + "'>");
@@ -104,7 +115,8 @@
           dialogElement.prepend('<span class="ujs-dialog-x"></span>');
         }
         $('.ui-widget-overlay').remove();
-        $('#remote-dialog-throbber').remove();
+        hideThrobber(ujsDialogElement);
+        $('#ujs-dialog-throbber').remove();
         $(this).dialog(dialogOptions);
         $(dialogElement).trigger('jqr.load');
       });
@@ -216,13 +228,24 @@
           break;
       }
       target.effect('highlight');
+      if (element.data('scroll-to')) {
+        target[0].scrollIntoView(true);
+      }
     }
     return false;
   }
 
   function ujsAjaxError(evt, xhr, status, error) {
     alert(error || 'An error occurred.');
-    hideThrobber(this);
+    var element = $(this);
+    if (element.data('real-element')) {
+      element = $('#' + element.data('real-element'));
+    }
+    var disableElement = element;
+    if (element.is('form') &&
+        $(ujsSubmitElement).parents('form').index(element) >= 0)
+      disableElement = ujsSubmitElement;
+    hideThrobber(disableElement);
   }
 
   function ujsConfirmClick() {
