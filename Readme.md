@@ -42,6 +42,7 @@ Full documentation can be found [here](https://rawgithub.com/wishabi/jqr-helpers
 * `link_to_remote_dialog` - open a remote dialog when a link is clicked (i.e. load
 the dialog content from a remote route)
 * `button_to_remote_dialog` - open a remote dialog when a button is clicked
+* `dialog_title` - set the dialog title from inside remote content
 * `link_to_ajax` - send an Ajax request when a link is clicked
 * `button_to_ajax` - send an Ajax request when a button is clicked
 * `form_tag_ajax` - send an Ajax request when a form is submitted
@@ -49,7 +50,7 @@ the dialog content from a remote route)
 * `tab_container` - create a tab container
 * `date_picker_tag` - create a date picker
 * `buttonset` - create a radio button set
-* `will_paginate_ajax` - create a will_paginate interface that uses Ajax to
+* `will_paginate_ajax` - create a `will_paginate` interface that uses Ajax to
 replace the paginated contents.
 
 There are two sets of options that recur throughout the methods here:
@@ -86,6 +87,11 @@ the data into the URL and have Rails populate it on the server side.
 `:none`. By default it is `:large`, indicating a throbber that goes in front
 of the screen. `:small` would be a small inline throbber next to the button or
 link that called the dialog, and `:none` shows no throbber at all.
+
+A separate method `dialog_title` allows you to set the dialog title in a
+remote dialog from _within_ the remote content. This allows you to reuse the
+remote content and call it from multiple pages while still showing the same
+title.
 
 A note about dialog ID - you can always pass in the special value `:next` for
 this. This will use whatever element is just after the clicked element

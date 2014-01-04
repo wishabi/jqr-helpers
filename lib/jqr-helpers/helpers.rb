@@ -158,6 +158,12 @@ module JqrHelpers
                      html_options.merge(:tag_name => 'button'))
     end
 
+    # Set the dialog title from +inside+ the dialog itself. This prints a
+    # hidden div which is read by the UJS callback to set the title.
+    def dialog_title(content)
+      content_tag :div, content, :class => 'ujs-dialog-title-hidden'
+    end
+
     # Create a link that fires off a jQuery Ajax request. This is basically
     # a wrapper around link_to :remote => true.
     # If a block is given, url and options will be shifted left by 1 position

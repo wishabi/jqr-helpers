@@ -34,3 +34,7 @@ form.ujs-ajax {
     height: 48px;
 }
 
+.ujs-dialog-title-hidden {
+    display: none;
+}
+

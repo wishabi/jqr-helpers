@@ -114,6 +114,11 @@
         if (closeX) {
           dialogElement.prepend('<span class="ujs-dialog-x"></span>');
         }
+        if (dialogElement.find('.ujs-dialog-title-hidden').length) {
+          if (!dialogOptions['title'])
+            dialogOptions['title'] =
+                dialogElement.find('.ujs-dialog-title-hidden').text();
+        }
         $('.ui-widget-overlay').remove();
         hideThrobber(ujsDialogElement);
         $('#ujs-dialog-throbber').remove();
@@ -172,9 +177,12 @@
     if (element.data('real-element')) {
       element = $('#' + element.data('real-element'));
     }
-    if (element.is('form') &&
-        $(ujsSubmitElement).parents('form').index(element) >= 0)
-      element = ujsSubmitElement;
+    if (element.is('form')) {
+      if ($(ujsSubmitElement).parents('form').index(element) >= 0)
+        element = ujsSubmitElement;
+      else
+        $(element).data('throbber', 'large');
+    }
     showThrobber(element);
   }
 

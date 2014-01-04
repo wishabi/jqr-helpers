@@ -291,6 +291,30 @@ nicer-looking than the default window.confirm() which is used by Rails.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#dialog_title-instance_method" title="#dialog_title (instance method)">- (Object) <strong>dialog_title</strong>(content) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the dialog title from <tt>inside</tt> the dialog itself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#form_for_ajax-instance_method" title="#form_for_ajax (instance method)">- (String) <strong>form_for_ajax</strong>(record, options = {}, &amp;block) </a>
     
 
@@ -506,12 +530,12 @@ using content already on the page.</p>
       <pre class="lines">
 
 
-313
-314
-315</pre>
+319
+320
+321</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 313</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 319</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid__random_string'>_random_string</span>
   <span class='const'>SecureRandom</span><span class='period'>.</span><span class='id identifier rubyid_hex'>hex</span><span class='lparen'>(</span><span class='int'>16</span><span class='rparen'>)</span>
@@ -621,12 +645,6 @@ button_to, so it can be used inside forms.</p>
       <pre class="lines">
 
 
-188
-189
-190
-191
-192
-193
 194
 195
 196
@@ -634,10 +652,16 @@ button_to, so it can be used inside forms.</p>
 198
 199
 200
-201</pre>
+201
+202
+203
+204
+205
+206
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 188</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 194</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_to_ajax'>button_to_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 
@@ -1018,18 +1042,18 @@ then be passed into jQuery's buttonset() method.</p>
       <pre class="lines">
 
 
-301
-302
-303
-304
-305
-306
 307
 308
-309</pre>
+309
+310
+311
+312
+313
+314
+315</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 301</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 307</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_buttonset'>buttonset</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_values'>values</span><span class='comma'>,</span> <span class='id identifier rubyid_selected'>selected</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
@@ -1280,18 +1304,18 @@ the date and the jQuery date format to be the same.</p>
       <pre class="lines">
 
 
-284
-285
-286
-287
-288
-289
 290
 291
-292</pre>
+292
+293
+294
+295
+296
+297
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_date_picker_tag'>date_picker_tag</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>=</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_format'>format</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:format</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>%Y-%m-%d</span><span class='tstring_end'>'</span></span>
@@ -1301,6 +1325,48 @@ the date and the jQuery date format to be the same.</p>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ujs-date-picker</span><span class='tstring_end'>'</span></span>
   <span class='id identifier rubyid_text_field_tag'>text_field_tag</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dialog_title-instance_method">
+  
+    - (<tt>Object</tt>) <strong>dialog_title</strong>(content) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set the dialog title from <tt>inside</tt> the dialog itself. This prints a
+hidden div which is read by the UJS callback to set the title.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+163
+164
+165</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 163</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_dialog_title'>dialog_title</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_content_tag'>content_tag</span> <span class='symbol'>:div</span><span class='comma'>,</span> <span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ujs-dialog-title-hidden</span><span class='tstring_end'>'</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1375,20 +1441,20 @@ form_for instead of form_tag.</p>
       <pre class="lines">
 
 
-224
-225
-226
-227
-228
-229
 230
 231
 232
 233
-234</pre>
+234
+235
+236
+237
+238
+239
+240</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 224</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 230</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_form_for_ajax'>form_for_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_record'>record</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:remote</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -1484,19 +1550,19 @@ form_tag with :remote =&gt; true.</p>
       <pre class="lines">
 
 
-208
-209
-210
-211
-212
-213
 214
 215
 216
-217</pre>
+217
+218
+219
+220
+221
+222
+223</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_form_tag_ajax'>form_tag_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 
@@ -1609,21 +1675,21 @@ used for the body.</p>
       <pre class="lines">
 
 
-169
-170
-171
-172
-173
-174
 175
 176
 177
 178
 179
-180</pre>
+180
+181
+182
+183
+184
+185
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_link_to_ajax'>link_to_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -2078,12 +2144,6 @@ URL).</p>
       <pre class="lines">
 
 
-249
-250
-251
-252
-253
-254
 255
 256
 257
@@ -2102,10 +2162,16 @@ URL).</p>
 270
 271
 272
-273</pre>
+273
+274
+275
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 255</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tab_container'>tab_container</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_renderer'>renderer</span> <span class='op'>=</span> <span class='const'>PanelRenderer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -2149,7 +2215,9 @@ URL).</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Create a will_paginate pagination interface which runs via Ajax.</p>
+<p>Create a will_paginate pagination interface which runs via Ajax. If
+will_paginate is not in the Gemfile or gem environment, this will throw an
+error.</p>
 
 
   </div>
@@ -2231,23 +2299,23 @@ selector.</p>
       <pre class="lines">
 
 
-383
-384
-385
-386
-387
-388
-389
-390
 391
 392
 393
 394
 395
-396</pre>
+396
+397
+398
+399
+400
+401
+402
+403
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 383</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 391</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_will_paginate_ajax'>will_paginate_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_collection'>collection</span><span class='comma'>,</span> <span class='id identifier rubyid_to_update'>to_update</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='const'>AjaxLinkRenderer</span><span class='rparen'>)</span>
@@ -2273,7 +2341,7 @@ selector.</p>
 </div>
 
     <div id="footer">
-  Generated on Fri Jan  3 15:22:08 2014 by
+  Generated on Sat Jan  4 18:53:11 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-1.9.3).
 </div>
