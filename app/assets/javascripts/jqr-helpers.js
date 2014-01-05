@@ -115,7 +115,7 @@
           dialogElement.prepend('<span class="ujs-dialog-x"></span>');
         }
         if (dialogElement.find('.ujs-dialog-title-hidden').length) {
-          if (!dialogOptions['title'])
+          if (!dialogOptions['title'] || dialogOptions['title'] == 'Dialog')
             dialogOptions['title'] =
                 dialogElement.find('.ujs-dialog-title-hidden').text();
         }
