@@ -28,8 +28,14 @@
 
   // called from dialog button value
   function ujsDialogClose() {
-    $('.ui-dialog-content:visible').dialog('destroy')
-        .addClass('ujs-dialog-hidden');
+    $('.ui-dialog-content:visible').each(function() {
+      if ($(this).data('remote-dialog')) {
+        $(this).dialog('destroy').remove();
+      }
+      else {
+        $(this).dialog('destroy').addClass('ujs-dialog-hidden');
+      }
+    });
   }
 
   function ujsDialogOpen() {
@@ -110,6 +116,7 @@
         $('body').append("<div id='" + dialogID + "'>");
         dialogElement = $('#' + dialogID);
       }
+      dialogElement.data('remote-dialog', true);
       dialogElement.load(url, function() {
         if (closeX) {
           dialogElement.prepend('<span class="ujs-dialog-x"></span>');
@@ -145,7 +152,8 @@
   function ujsButtonClick(event) {
     var element = $(this);
     element.uniqueId(); // to store for later
-    if ($.rails.allowAction(element)) {
+    // if the button is inside a form, allowAction is already called.
+    if ($(this).closest('form').length || $.rails.allowAction(element)) {
       element.data('confirm', null); // we've already fired it
       // largely copied from rails_jquery.js
       var href = element.data('url');
