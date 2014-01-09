@@ -124,6 +124,12 @@ Other Ajax options:
 The function will be in the scope of the original element, and
 will be passed the result data of the Ajax request.
 * `:refresh` (Boolean) - refresh the current page when the call is completed.
+This will cause `:update, :append, :delete,` `redirect`,
+and `:callback` to be ignored.
+* `redirect` (Boolean) - redirect the browser to the URL returned by the
+server. This will check the returned data - if it begins with either "http"
+or "/", it will consider it a success and do the redirect. Otherwise, it will
+alert an error as usual.
 This will cause `:update, :append, :delete,` and `:callback` to be ignored.
 * `:use_dialog_opener` (Boolean) - if the Ajax request is sent from inside
 a dialog, this indicates that the update/append/delete options should

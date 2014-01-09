@@ -217,6 +217,10 @@
       window.location.reload();
       return;
     }
+    else if (element.data('redirect') && data.indexOf('http') == 0) {
+      window.location = data;
+      return;
+    }
     if (element.data('callback')) {
       var callback = eval(element.data('callback'));
       callback.call(targetElement, data);

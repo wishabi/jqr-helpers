@@ -459,6 +459,7 @@ module JqrHelpers
       new_options[:'data-close-dialog'] = options.delete(:close_dialog)
       new_options[:'data-use-dialog-opener'] = options.delete(:use_dialog_opener)
       new_options[:'data-refresh'] = true if options.delete(:refresh)
+      new_options[:'data-redirect'] = true if options.delete(:redirect)
       new_options[:'data-scroll-to'] = true if options.delete(:scroll_to)
       new_options[:'data-throbber'] = options.delete(:throbber) || 'small'
 
