@@ -205,6 +205,17 @@
       disableElement = ujsSubmitElement;
     hideThrobber(disableElement);
     var targetElement = element;
+
+    if (element.data('redirect') &&
+        (data.indexOf('http') == 0 || data[0] == '/')) {
+      window.location = data;
+      return;
+    }
+    else if (!element.data('callback') && data &&
+        data.trim().charAt(0) != '<' && data != 'success') {
+      alert(data);
+      return;
+    }
     // if this was sent from a dialog, close the dialog and look at the
     // element that opened it for update/append/delete callbacks.
     if ($('.ui-dialog:visible').length) {
@@ -217,17 +228,9 @@
       window.location.reload();
       return;
     }
-    else if (element.data('redirect') && data.indexOf('http') == 0) {
-      window.location = data;
-      return;
-    }
     if (element.data('callback')) {
       var callback = eval(element.data('callback'));
       callback.call(targetElement, data);
-    }
-    else if (data && data.trim().charAt(0) != '<' && data != 'success') {
-      alert(data);
-      return;
     }
     var selector = element.data('selector');
     var target = null;
