@@ -233,21 +233,50 @@
       callback.call(targetElement, data);
     }
     var selector = element.data('selector');
+    var empty = element.data('empty');
+    var container = element.data('container');
     var target = null;
     if (selector) {
       if (selector[0] == '#') target = $(selector);
       else target = $(targetElement).parents(selector);
+
+      if (container) {
+        if (container[0] == '#') container = $(container);
+        else container = targetElement.parents(container);
+      }
+
       switch (element.data('result-method')) {
         case 'update':
           target = $(data).replaceAll(target);
           target.trigger('jqr.load');
           break;
         case 'append':
+          if (empty && target.children().length == 0) {
+            $('#' + empty).hide();
+            if (container) {
+              container.show();
+            }
+            else {
+              target.show();
+            }
+          }
           target.append(data);
           target.trigger('jqr.load');
           break;
         case 'delete':
-          target.fadeOut(500, function() {$(this).remove()});
+          if (empty && target.parent().children().length == 1) {
+            if (container) {
+              container.hide();
+            }
+            else {
+              target.parent().hide();
+            }
+            $('#' + empty).show();
+            $(target).remove();
+          }
+          else {
+            target.fadeOut(500, function() {$(this).remove()});
+          }
           break;
       }
       target.effect('highlight');

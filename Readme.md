@@ -120,6 +120,19 @@ an ancestor of the button tag with the class of `my-parent`.
 
 Other Ajax options:
 
+* `:empty` (String) - the ID of an element which should be shown when the
+element you are appending/deleting from is empty. If you delete the last child
+from an element, that element will be hidden and the "empty" element will
+be shown. Conversely, when you add a child to a target with no children, the
+"empty" element will be hidden. Using `empty` without `container` implies that
+the target element's parent should be hidden when the last child is deleted.
+* `container` (String) - the selector (ID or class name for a parent) of the
+element which contains the target. For example, if you are appending to a
+`tbody` element, you may pass the `table` element's ID into this. This can be
+used in conjunction with `empty` to hide the entire table, including the header,
+when it is empty and instead show the `empty` element, and vice versa.
+You can skip using this option to indicate that the show/hide
+behavior should still happen but it should use the target element itself.
 * `:callback` (String) - the name of a JS function to call on completion.
 The function will be in the scope of the original element, and
 will be passed the result data of the Ajax request.

@@ -462,6 +462,8 @@ module JqrHelpers
       new_options[:'data-redirect'] = true if options.delete(:redirect)
       new_options[:'data-scroll-to'] = true if options.delete(:scroll_to)
       new_options[:'data-throbber'] = options.delete(:throbber) || 'small'
+      new_options[:'data-empty'] = options.delete(:empty)
+      new_options[:'data-container'] = options.delete(:container)
 
       [:update, :append, :delete].each do |result_method|
         selector = options.delete(result_method)
