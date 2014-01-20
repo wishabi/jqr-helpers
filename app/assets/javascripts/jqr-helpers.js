@@ -10,6 +10,8 @@
         $(element).after("<img src='/images/jqr-helpers/throbber.gif' class='throbber'/>");
     }
     $(element).attr('disabled', 'disabled');
+    // refresh disabled state
+    $(element).attr('autocomplete', 'off');
   }
 
   function hideThrobber(element) {
@@ -275,7 +277,7 @@
             $(target).remove();
           }
           else {
-            target.fadeOut(500, function() {$(this).remove()});
+          target.fadeOut(500, function() {$(this).remove()});
           }
           break;
       }
@@ -353,6 +355,7 @@
       });
       $(this).tabs(options);
     });
+
   }
 
   $(function() {
@@ -380,13 +383,6 @@
       $('[data-ujs-confirm=true]').live('click', ujsConfirmClick);
     }
     $('body').trigger('jqr.load');
-
-    // Derived from
-    // https://makandracards.com/makandra/3877-re-enable-submit-buttons-disabled-by-the-disabled_with-option
-    $(window).unload(function() {
-      $.rails.enableFormElements($($.rails.formSubmitSelector));
-      $('input[disabled],button[disabled],select[disabled]').prop('disabled', false);
-    });
 
   });
 
