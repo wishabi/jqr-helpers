@@ -362,6 +362,7 @@
         if (button.data('disable-with')) {
           button.html(button.data('disable-with'));
           button.attr('disabled', 'disabled');
+          button.attr('autocomplete', 'off');
         }
         form.submit();
         return false;
