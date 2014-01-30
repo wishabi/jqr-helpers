@@ -314,6 +314,40 @@ module JqrHelpers
       content_tag(:div, raw(content), html_options)
     end
 
+    # This is identical to the built-in Rails button_to() in every way except
+    # that it will work inside an existing form. Instead, it appends a form
+    # to the body, and uses a click handler to submit it.
+    # This does not support the :remote option - instead, use {#button_to_ajax}.
+    # @param content [String] the text of the button.
+    # @param url [String|Hash] the URL (or URL hash) the button should go to.
+    # @param options [Hash] HTML Options to pass to the button.
+    def button_to_external(content, url, options={})
+      options[:disabled] = 'disabled' if options.delete(:disabled)
+      method = (options.delete(:method) || 'post').to_s.downcase
+      confirm = options.delete(:confirm)
+      disable_with = options.delete(:disable_with)
+
+      token_name = token_value = nil
+      if %w(post put).include?(method) && protect_against_forgery?
+        token_name = request_forgery_protection_token.to_s
+        token_value = form_authenticity_token
+      end
+      url = url_for(url) if url.is_a?(Hash)
+
+      options['data-confirm'] = confirm if confirm
+      options['data-disable-with'] = disable_with if disable_with
+      options['data-method'] = method if method
+      options['data-url'] = url
+      options[:class] ||= ''
+      options[:class] << ' ujs-external-button'
+      if token_name
+        options['data-token-name'] = token_name
+        options['data-token-value'] = token_value
+      end
+
+      content_tag(:button, content, options)
+    end
+
     # Generate a random string for IDs.
     # @return [String]
     def self._random_string

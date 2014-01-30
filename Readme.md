@@ -50,6 +50,7 @@ the dialog content from a remote route)
 * `tab_container` - create a tab container
 * `date_picker_tag` - create a date picker
 * `buttonset` - create a radio button set
+* `button_to_external` - create a working `button_to` button inside an existing form (!)
 * `will_paginate_ajax` - create a `will_paginate` interface that uses Ajax to
 replace the paginated contents.
 

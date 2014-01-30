@@ -277,7 +277,7 @@
             $(target).remove();
           }
           else {
-          target.fadeOut(500, function() {$(this).remove()});
+            target.fadeOut(500, function() {$(this).remove()});
           }
           break;
       }
@@ -328,6 +328,45 @@
   }
 
   function ujsLoadPlugins(event) {
+
+    function addHiddenField(form, name, value) {
+      var input = $('<input type="hidden">');
+      input.attr('name', name);
+      input.attr('value', value);
+      form.append(input);
+    }
+
+    $('.ujs-external-button').each(function() {
+      var button = $(this);
+      var form = $('<form>');
+      var method = button.data('method');
+      if (method == 'put' || method == 'delete') {
+        form.attr('method', 'post');
+        addHiddenField(form, '_method', method);
+      }
+      else {
+        form.attr('method', method);
+      }
+      form.attr('action', button.data('url'));
+      if (method != 'get') {
+        form.attr('rel', 'nofollow');
+        addHiddenField(form, button.data('token-name'),
+            button.data('token-value'));
+      }
+      $('body').append(form);
+      button.click(function(event) {
+        event.stopImmediatePropagation();
+        if (!$.rails.allowAction(button)) {
+          return false;
+        }
+        if (button.data('disable-with')) {
+          button.html(button.data('disable-with'));
+          button.attr('disabled', 'disabled');
+        }
+        form.submit();
+        return false;
+      });
+    });
     $('.ujs-date-picker', event.target).each(function() {
       var options = $(this).data('date-options');
       $(this).datepicker(options);
