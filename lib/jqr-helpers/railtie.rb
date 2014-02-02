@@ -1,6 +1,7 @@
 require 'helpers'
 
 module JqrHelpers
+  # @private
   class Railtie < Rails::Railtie
     initializer 'jqr-helpers.helpers' do
       ActionView::Base.send :include, Helpers

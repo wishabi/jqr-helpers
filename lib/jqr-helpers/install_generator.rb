@@ -2,6 +2,7 @@ require 'rails'
 require 'rails/generators'
 
 module JqrHelpers
+  # @private
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
 

@@ -327,6 +327,21 @@
     return false;
   }
 
+  function ujsQuickButtonClick(event) {
+    var radio = $(event.currentTarget).prev('input');
+    var form = radio[0].form;
+    var name = $(radio).attr('name');
+    $(form).find('input[name="' + name + '"]').each(function() {
+      $(this).next('label').removeClass('ui-state-active');
+    });
+
+    $(event.currentTarget).addClass('ui-state-active');
+  }
+
+  function ujsQuickButtonHover(event) {
+    $j(event.currentTarget).toggleClass('ui-state-hover');
+  }
+
   function ujsLoadPlugins(event) {
 
     function addHiddenField(form, name, value) {
@@ -376,6 +391,7 @@
     $('.ujs-button-set', event.target).each(function() {
       $(this).buttonset();
     });
+
     $('.ujs-tab-container', event.target).each(function() {
       var options = $(this).data('tab-options');
       options = $.extend(options, {
@@ -410,6 +426,10 @@
       $(document).on('ajax:success', '.ujs-ajax', ujsAjaxSuccess);
       $(document).on('ajax:error', '.ujs-ajax', ujsAjaxError);
       $(document).on('click', '[data-ujs-confirm=true]', ujsConfirmClick);
+      $(document).on('click', '.ujs-quick-buttonset label',
+          ujsQuickButtonClick);
+      $(document).on('mouseenter mouseleave', '.ujs-quick-buttonset label',
+          ujsQuickButtonHover);
     }
     else {
       $('body').live('jqr.load', ujsLoadPlugins);
@@ -421,6 +441,9 @@
       $('.ujs-ajax').live('ajax:success', ujsAjaxSuccess);
       $('.ujs-ajax').live('ajax:error', ujsAjaxError);
       $('[data-ujs-confirm=true]').live('click', ujsConfirmClick);
+      $('.ujs-quick-buttonset label').live('click', ujsQuickButtonClick);
+      $('.ujs-quick-buttonset label').live('mouseenter mouseleave',
+          ujsQuickButtonHover);
     }
     $('body').trigger('jqr.load');
 

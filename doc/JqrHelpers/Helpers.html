@@ -6,13 +6,13 @@
 <title>
   Module: JqrHelpers::Helpers
   
-    &mdash; Documentation by YARD 0.8.7.3
+    &mdash; Documentation by YARD 0.8.5.2
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   hasFrames = window.top.frames.main ? true : false;
@@ -101,39 +101,6 @@
 
 
 
-  
-    <h2>
-      Class Method Summary
-      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#_random_string-class_method" title="_random_string (class method)">+ (String) <strong>_random_string</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Generate a random string for IDs.</p>
-</div></span>
-  
-</li>
-
-      
-    </ul>
   
     <h2>
       Instance Method Summary
@@ -462,6 +429,31 @@ using content already on the page.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#quick_radio_set-instance_method" title="#quick_radio_set (instance method)">- (Object) <strong>quick_radio_set</strong>(name, values, selected = nil, html_options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Prints a button set which <b>pretends</b> to be a jQuery buttonset() and is
+specifically for radio buttons.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#tab_container-instance_method" title="#tab_container (instance method)">- (Object) <strong>tab_container</strong>(options = {}, html_options = {}, &amp;block) </a>
     
 
@@ -511,66 +503,6 @@ using content already on the page.</p>
   
 
 
-
-  <div id="class_method_details" class="method_details_list">
-    <h2>Class Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="_random_string-class_method">
-  
-    + (<tt>String</tt>) <strong>_random_string</strong> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Generate a random string for IDs.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-353
-354
-355</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 353</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid__random_string'>_random_string</span>
-  <span class='const'>SecureRandom</span><span class='period'>.</span><span class='id identifier rubyid_hex'>hex</span><span class='lparen'>(</span><span class='int'>16</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -670,7 +602,6 @@ button_to, so it can be used inside forms.</p>
       <pre class="lines">
 
 
-194
 195
 196
 197
@@ -683,10 +614,11 @@ button_to, so it can be used inside forms.</p>
 204
 205
 206
-207</pre>
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 195</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_to_ajax'>button_to_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 
@@ -818,14 +750,14 @@ button_to, so it can be used inside forms.</p>
       <pre class="lines">
 
 
-101
 102
 103
 104
-105</pre>
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_to_dialog'>button_to_dialog</span><span class='lparen'>(</span><span class='id identifier rubyid_dialog_id'>dialog_id</span><span class='comma'>,</span> <span class='id identifier rubyid_html_content'>html_content</span><span class='comma'>,</span> <span class='id identifier rubyid_dialog_options'>dialog_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -920,35 +852,35 @@ the body, and uses a click handler to submit it. This does not support the
       <pre class="lines">
 
 
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349</pre>
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 324</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 362</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_to_external'>button_to_external</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:disabled</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>disabled</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:disabled</span><span class='rparen'>)</span>
@@ -1093,14 +1025,14 @@ using content already on the page.</p>
       <pre class="lines">
 
 
-155
 156
 157
 158
-159</pre>
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_to_remote_dialog'>button_to_remote_dialog</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_html_content'>html_content</span><span class='comma'>,</span> <span class='id identifier rubyid_dialog_options'>dialog_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1211,7 +1143,6 @@ then be passed into jQuery's buttonset() method.</p>
       <pre class="lines">
 
 
-307
 308
 309
 310
@@ -1219,10 +1150,11 @@ then be passed into jQuery's buttonset() method.</p>
 312
 313
 314
-315</pre>
+315
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 307</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 308</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_buttonset'>buttonset</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_values'>values</span><span class='comma'>,</span> <span class='id identifier rubyid_selected'>selected</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
@@ -1336,15 +1268,15 @@ Done using button_to, so note that a form element will be added.</p>
       <pre class="lines">
 
 
-114
 115
 116
 117
 118
-119</pre>
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_confirm_button'>confirm_button</span><span class='lparen'>(</span><span class='id identifier rubyid_html_content'>html_content</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_button_to'>button_to</span> <span class='id identifier rubyid_html_content'>html_content</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span>
@@ -1473,7 +1405,6 @@ the date and the jQuery date format to be the same.</p>
       <pre class="lines">
 
 
-290
 291
 292
 293
@@ -1481,10 +1412,11 @@ the date and the jQuery date format to be the same.</p>
 295
 296
 297
-298</pre>
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 291</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_date_picker_tag'>date_picker_tag</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>=</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_format'>format</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:format</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>%Y-%m-%d</span><span class='tstring_end'>'</span></span>
@@ -1527,12 +1459,12 @@ hidden div which is read by the UJS callback to set the title.</p>
       <pre class="lines">
 
 
-163
 164
-165</pre>
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dialog_title'>dialog_title</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_content_tag'>content_tag</span> <span class='symbol'>:div</span><span class='comma'>,</span> <span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ujs-dialog-title-hidden</span><span class='tstring_end'>'</span></span>
@@ -1610,7 +1542,6 @@ form_for instead of form_tag.</p>
       <pre class="lines">
 
 
-230
 231
 232
 233
@@ -1620,10 +1551,11 @@ form_for instead of form_tag.</p>
 237
 238
 239
-240</pre>
+240
+241</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 230</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 231</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_form_for_ajax'>form_for_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_record'>record</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:remote</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -1719,7 +1651,6 @@ form_tag with :remote =&gt; true.</p>
       <pre class="lines">
 
 
-214
 215
 216
 217
@@ -1728,10 +1659,11 @@ form_tag with :remote =&gt; true.</p>
 220
 221
 222
-223</pre>
+223
+224</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 215</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_form_tag_ajax'>form_tag_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 
@@ -1844,7 +1776,6 @@ used for the body.</p>
       <pre class="lines">
 
 
-175
 176
 177
 178
@@ -1855,10 +1786,11 @@ used for the body.</p>
 183
 184
 185
-186</pre>
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 176</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_link_to_ajax'>link_to_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -1994,7 +1926,6 @@ pass :div, :span, etc.</p>
       <pre class="lines">
 
 
-57
 58
 59
 60
@@ -2030,10 +1961,11 @@ pass :div, :span, etc.</p>
 90
 91
 92
-93</pre>
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_link_to_dialog'>link_to_dialog</span><span class='lparen'>(</span><span class='id identifier rubyid_dialog_id'>dialog_id</span><span class='comma'>,</span> <span class='id identifier rubyid_html_content'>html_content</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_dialog_options'>dialog_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2193,7 +2125,6 @@ pass :div, :span, etc.</p>
       <pre class="lines">
 
 
-132
 133
 134
 135
@@ -2207,10 +2138,11 @@ pass :div, :span, etc.</p>
 143
 144
 145
-146</pre>
+146
+147</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_link_to_remote_dialog'>link_to_remote_dialog</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_html_content'>html_content</span><span class='comma'>,</span> <span class='id identifier rubyid_dialog_options'>dialog_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2226,6 +2158,169 @@ pass :div, :span, etc.</p>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='lbracket'>[</span><span class='symbol'>:data-dialog-url</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_url'>url</span>
   <span class='id identifier rubyid_link_to_dialog'>link_to_dialog</span><span class='lparen'>(</span><span class='const'>Helpers</span><span class='period'>.</span><span class='id identifier rubyid__random_string'>_random_string</span><span class='comma'>,</span> <span class='id identifier rubyid_html_content'>html_content</span><span class='comma'>,</span>
                  <span class='id identifier rubyid_dialog_options'>dialog_options</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="quick_radio_set-instance_method">
+  
+    - (<tt>Object</tt>) <strong>quick_radio_set</strong>(name, values, selected = nil, html_options = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Prints a button set which <b>pretends</b> to be a jQuery buttonset() and is
+specifically for radio buttons. The main difference is that this will load
+much faster in DOM-heavy pages (e.g. in tables where you may have hundreds
+of buttons) and it does not have most of the frills of jQuery button(),
+such as allowing disabling.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the name of the form element.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>values</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;String, String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a hash of value =&gt; label.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selected</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the selected value, if any.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>html_options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a set of options that will be passed into the parent div tag.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 328</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_quick_radio_set'>quick_radio_set</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_values'>values</span><span class='comma'>,</span> <span class='id identifier rubyid_selected'>selected</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='comment'># @param name [String] the name of the form element.
+</span><span class='comment'># @param values [Hash&lt;String, String&gt;] a hash of value =&gt; label.
+</span><span class='comment'># @param selected [String] the selected value, if any.
+</span><span class='comment'># @param html_options [Hash] a set of options that will be passed into
+</span><span class='comment'>#   the parent div tag.
+</span>  <span class='id identifier rubyid_html_options'>html_options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_html_options'>html_options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ujs-quick-buttonset ui-buttonset</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_last_key'>last_key</span> <span class='op'>=</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='int'>1</span>
+  <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_label'>label</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='id identifier rubyid_content'>content</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_radio_button_tag'>radio_button_tag</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_selected'>selected</span> <span class='op'>==</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span>
+                            <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ui-helper-hidden-accessible</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_label_class'>label_class</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ui-button ui-widget ui-state-default ui-button-text-only</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_label_class'>label_class</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ui-state-active</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_selected'>selected</span> <span class='op'>==</span> <span class='id identifier rubyid_value'>value</span>
+    <span class='id identifier rubyid_label_class'>label_class</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ui-corner-left</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>==</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_label_class'>label_class</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ui-corner-right</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>==</span> <span class='id identifier rubyid_last_key'>last_key</span>
+    <span class='id identifier rubyid_content'>content</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_label_tag'>label_tag</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_value'>value</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_label_class'>label_class</span><span class='comma'>,</span>
+                         <span class='symbol'>:role</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>button</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+                         <span class='symbol'>:aria-disabled</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>false</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_content_tag'>content_tag</span> <span class='symbol'>:span</span><span class='comma'>,</span> <span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ui-button-text</span><span class='tstring_end'>'</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_content_tag'>content_tag</span><span class='lparen'>(</span><span class='symbol'>:div</span><span class='comma'>,</span> <span class='id identifier rubyid_raw'>raw</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='rparen'>)</span>
+
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2313,7 +2408,6 @@ URL).</p>
       <pre class="lines">
 
 
-255
 256
 257
 258
@@ -2337,10 +2431,11 @@ URL).</p>
 276
 277
 278
-279</pre>
+279
+280</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 255</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 256</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tab_container'>tab_container</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_renderer'>renderer</span> <span class='op'>=</span> <span class='const'>PanelRenderer</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -2422,7 +2517,7 @@ error.</p>
       
         &mdash;
         <div class='inline'>
-<p>the selector to use to update the content - either a “.class” or “#id”
+<p>the selector to use to update the content - either a ".class" or "#id"
 selector.</p>
 </div>
       
@@ -2468,23 +2563,23 @@ selector.</p>
       <pre class="lines">
 
 
-425
-426
-427
-428
-429
-430
-431
-432
-433
-434
-435
-436
-437
-438</pre>
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 425</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 464</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_will_paginate_ajax'>will_paginate_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_collection'>collection</span><span class='comma'>,</span> <span class='id identifier rubyid_to_update'>to_update</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='const'>AjaxLinkRenderer</span><span class='rparen'>)</span>
@@ -2510,9 +2605,9 @@ selector.</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Jan 30 16:04:14 2014 by
+  Generated on Sun Feb  2 15:18:54 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.3 (ruby-1.9.3).
+  0.8.5.2 (ruby-1.9.3).
 </div>
 
   </body>

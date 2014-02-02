@@ -7,6 +7,7 @@ module JqrHelpers
     class PanelRenderer
 
       # @return [Array<Hash>]
+      # @private
       attr_accessor :panels
 
       def initialize
@@ -314,6 +315,38 @@ module JqrHelpers
       content_tag(:div, raw(content), html_options)
     end
 
+    # Prints a button set which *pretends* to be a jQuery buttonset() and is
+    # specifically for radio buttons. The main difference is that this will
+    # load much faster in DOM-heavy pages (e.g. in tables where you may have
+    # hundreds of buttons) and it does not have most of the frills of jQuery
+    # button(), such as allowing disabling.
+    # @param name [String] the name of the form element.
+    # @param values [Hash<String, String>] a hash of value => label.
+    # @param selected [String] the selected value, if any.
+    # @param html_options [Hash] a set of options that will be passed into
+    #   the parent div tag.
+    def quick_radio_set(name, values, selected=nil, html_options={})
+      html_options[:class] ||= ''
+      html_options[:class] << ' ujs-quick-buttonset ui-buttonset'
+      content = ''
+      last_key = values.keys.length - 1
+      values.each_with_index do |(value, label), i|
+        content << radio_button_tag(name, value, selected == value,
+                                :class => 'ui-helper-hidden-accessible')
+        label_class = 'ui-button ui-widget ui-state-default ui-button-text-only'
+        label_class << ' ui-state-active' if selected == value
+        label_class << ' ui-corner-left' if i == 0
+        label_class << ' ui-corner-right' if i == last_key
+        content << label_tag("#{name}_#{value}", :class => label_class,
+                             :role => 'button',
+                             :'aria-disabled' => 'false') do
+          content_tag :span, label, :class => 'ui-button-text'
+        end
+      end
+      content_tag(:div, raw(content), html_options)
+
+    end
+
     # This is identical to the built-in Rails button_to() in every way except
     # that it will work inside an existing form. Instead, it appends a form
     # to the body, and uses a click handler to submit it.
@@ -350,6 +383,7 @@ module JqrHelpers
 
     # Generate a random string for IDs.
     # @return [String]
+    # @private
     def self._random_string
       SecureRandom.hex(16)
     end
