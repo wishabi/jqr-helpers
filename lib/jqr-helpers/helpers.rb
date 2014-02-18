@@ -351,6 +351,7 @@ module JqrHelpers
     # that it will work inside an existing form. Instead, it appends a form
     # to the body, and uses a click handler to submit it.
     # This does not support the :remote option - instead, use {#button_to_ajax}.
+    # This supports the :target option to pass to the form.
     # @param content [String] the text of the button.
     # @param url [String|Hash] the URL (or URL hash) the button should go to.
     # @param options [Hash] HTML Options to pass to the button.
@@ -371,6 +372,7 @@ module JqrHelpers
       options['data-disable-with'] = disable_with if disable_with
       options['data-method'] = method if method
       options['data-url'] = url
+      options[:'data-target'] = options.delete(:target)
       options[:class] ||= ''
       options[:class] << ' ujs-external-button'
       if token_name

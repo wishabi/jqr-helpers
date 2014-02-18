@@ -363,6 +363,7 @@
         form.attr('method', method);
       }
       form.attr('action', button.data('url'));
+      form.attr('target', button.data('target'));
       if (method != 'get') {
         form.attr('rel', 'nofollow');
         addHiddenField(form, button.data('token-name'),
