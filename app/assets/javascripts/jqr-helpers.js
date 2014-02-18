@@ -327,15 +327,27 @@
     return false;
   }
 
-  function ujsQuickButtonClick(event) {
-    var radio = $(event.currentTarget).prev('input');
+  function updateQuickButton(radio, label) {
     var form = radio[0].form;
     var name = $(radio).attr('name');
     $(form).find('input[name="' + name + '"]').each(function() {
       $(this).next('label').removeClass('ui-state-active');
     });
 
-    $(event.currentTarget).addClass('ui-state-active');
+    label.addClass('ui-state-active');
+
+  }
+
+  function ujsQuickButtonChange(event) {
+    var radio = $(event.currentTarget);
+    var label = radio.next('label');
+    updateQuickButton(radio, label);
+  }
+
+  function ujsQuickButtonClick(event) {
+    var label = $(event.currentTarget);
+    var radio = label.prev('input');
+    updateQuickButton(radio, label);
   }
 
   function ujsQuickButtonHover(event) {
@@ -343,6 +355,8 @@
   }
 
   function ujsLoadPlugins(event) {
+
+    $j('.ujs-quick-buttonset input:checked').change();
 
     function addHiddenField(form, name, value) {
       var input = $('<input type="hidden">');
@@ -427,6 +441,8 @@
       $(document).on('ajax:success', '.ujs-ajax', ujsAjaxSuccess);
       $(document).on('ajax:error', '.ujs-ajax', ujsAjaxError);
       $(document).on('click', '[data-ujs-confirm=true]', ujsConfirmClick);
+      $(document).on('change', '.ujs-quick-buttonset input',
+          ujsQuickButtonChange);
       $(document).on('click', '.ujs-quick-buttonset label',
           ujsQuickButtonClick);
       $(document).on('mouseenter mouseleave', '.ujs-quick-buttonset label',
@@ -442,6 +458,7 @@
       $('.ujs-ajax').live('ajax:success', ujsAjaxSuccess);
       $('.ujs-ajax').live('ajax:error', ujsAjaxError);
       $('[data-ujs-confirm=true]').live('click', ujsConfirmClick);
+      $('.ujs-quick-buttonset input').live('change', ujsQuickButtonChange);
       $('.ujs-quick-buttonset label').live('click', ujsQuickButtonClick);
       $('.ujs-quick-buttonset label').live('mouseenter mouseleave',
           ujsQuickButtonHover);
