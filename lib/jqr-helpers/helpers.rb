@@ -290,7 +290,7 @@ module JqrHelpers
     # @return [String]
     def date_picker_tag(name, value=Date.today, options={}, html_options={})
       format = options.delete(:format) || '%Y-%m-%d'
-      value = value.strftime(format)
+      value = value.strftime(format) if value.present?
       options[:dateFormat] = _map_date(format)
       html_options[:'data-date-options'] = options.to_json
       html_options[:class] ||= ''
