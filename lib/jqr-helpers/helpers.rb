@@ -25,11 +25,11 @@ module JqrHelpers
       def panel(title, url_or_options={}, options={}, &block)
         if url_or_options.is_a?(String)
           url = url_or_options
-          content = ''
+          content = nil
           id = nil
         else
           options = url_or_options
-          content = yield
+          content = block
           id = Helpers._random_string
           url = '#' + id
         end
@@ -245,10 +245,10 @@ module JqrHelpers
     # (with a URL).
     # @example
     #   <%= tab_container {:collapsible => true}, {:class => 'my-tabs}' do |r| %>
-    #     <%= r.panel 'Tab 1',  do %>
+    #     <% r.panel 'Tab 1' do %>
     #       My tab content here
     #     <% end %>
-    #     <%= r.panel 'Tab 2', 'http://www.foobar.com/' %>
+    #     <% r.panel 'Tab 2', 'http://www.foobar.com/' %>
     #   <% end %>
     # @param options [Hash] options to pass to the jQuery tabs() method.
     # @param html_options [Hash] options to pass to the tab container element
@@ -271,7 +271,7 @@ module JqrHelpers
         end
         s3 = renderer.panels.inject('') do |sum, panel|
           if panel[:options][:id]
-            sum = sum + content_tag(:div, panel[:content], panel[:options])
+            sum = sum + content_tag(:div, panel[:options], &panel[:content])
           end
           sum
         end

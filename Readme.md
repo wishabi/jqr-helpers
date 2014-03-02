@@ -170,10 +170,10 @@ Tabs (and eventually accordion panes and menus) are rendered using a "panel rend
 This allows you to loop through the tabs in an intuitive and concise way.
 
        <%= tab_container {:collapsible => true}, {:class => 'my-tabs}' do |r| %>
-         <%= r.panel 'Tab 1',  do %>
+         <% r.panel 'Tab 1' do %>
            My tab content here
          <% end %>
-         <%= r.panel 'Tab 2', 'http://www.foobar.com/' %>
+         <% r.panel 'Tab 2', 'http://www.foobar.com/' %>
        <% end %>
 
 ## jQuery Events ##
