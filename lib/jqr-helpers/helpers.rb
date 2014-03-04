@@ -524,7 +524,7 @@ module JqrHelpers
       new_options = {}
       new_options[:class] = options[:class] || ''
       new_options[:class] << ' ujs-ajax'
-      new_options[:'data-type'] = 'html'
+      new_options[:'data-type'] = options[:return_type] || 'html'
       new_options[:'data-callback'] = options.delete(:callback)
       new_options[:'data-close-dialog'] = options.delete(:close_dialog)
       new_options[:'data-use-dialog-opener'] = options.delete(:use_dialog_opener)

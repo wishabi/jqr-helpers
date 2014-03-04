@@ -123,6 +123,7 @@ an ancestor of the button tag with the class of `my-parent`.
 
 Other Ajax options:
 
+* `:return_type` (String) - the expected return type, e.g. 'text' or 'html'.
 * `:empty` (String) - the ID of an element which should be shown when the
 element you are appending/deleting from is empty. If you delete the last child
 from an element, that element will be hidden and the "empty" element will
