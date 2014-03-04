@@ -21,6 +21,7 @@
   }
 
   var ujsDialogElement = null; // the element that opened the dialog
+  var ujsLastDialog = null; // last opened dialog
   var ujsSubmitElement = null; // the element that submitted a form
 
   // called from dialog button value
@@ -30,17 +31,17 @@
 
   // called from dialog button value
   function ujsDialogClose() {
-    $('.ui-dialog-content:visible').each(function() {
-      if ($(this).data('remote-dialog')) {
-        $(this).dialog('destroy').remove();
-      }
-      else {
-        $(this).dialog('destroy').addClass('ujs-dialog-hidden');
-      }
-    });
+    if (!ujsLastDialog) return;
+    if (ujsLastDialog.data('remote-dialog')) {
+      ujsLastDialog.dialog('destroy').remove();
+    }
+    else {
+      ujsLastDialog.dialog('destroy').addClass('ujs-dialog-hidden');
+    }
   }
 
   function ujsDialogOpen() {
+    ujsLastDialog = $(this);
     $(this).css('maxHeight', ($(window).height() * 0.8) + 'px');
     if ($(this).parent().height() > $(window).height()) {
       $(this).height($(window).height() * 0.8);
