@@ -352,12 +352,12 @@
   }
 
   function ujsQuickButtonHover(event) {
-    $j(event.currentTarget).toggleClass('ui-state-hover');
+    $(event.currentTarget).toggleClass('ui-state-hover');
   }
 
   function ujsLoadPlugins(event) {
 
-    $j('.ujs-quick-buttonset input:checked').change();
+    $('.ujs-quick-buttonset input:checked').change();
 
     function addHiddenField(form, name, value) {
       var input = $('<input type="hidden">');
