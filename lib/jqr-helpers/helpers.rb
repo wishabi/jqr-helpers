@@ -478,6 +478,7 @@ module JqrHelpers
     # @param format [String] the Rails date format to map
     # @return [String] the jQuery date format
     def _map_date(format)
+      format = format.clone
       format.gsub!(/'/, "''")
       format_map = {
         '%Y' => 'yy',
