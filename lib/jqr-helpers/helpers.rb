@@ -497,7 +497,6 @@ module JqrHelpers
         format_expr = ''
         percent = format.index('%')
         break if !percent
-        puts "% is #{percent} prev is #{prev_index} format is #{format}"
         if percent > prev_index
           format.insert(percent, "'")
           format.insert(prev_index, "'")
