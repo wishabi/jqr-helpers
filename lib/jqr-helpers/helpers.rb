@@ -102,7 +102,7 @@ module JqrHelpers
     def button_to_dialog(dialog_id, html_content, dialog_options={},
       html_options={})
       link_to_dialog(dialog_id, html_content, dialog_options,
-                     html_options.merge(:tag_name => 'button'))
+                   html_options.merge(:tag_name => 'button', :type => 'button'))
     end
 
     # Create a button that prompts a jQuery confirm dialog, which is nicer-looking
@@ -156,7 +156,7 @@ module JqrHelpers
     def button_to_remote_dialog(url, html_content, dialog_options={},
       html_options={})
       link_to_remote_dialog(url, html_content, dialog_options,
-                     html_options.merge(:tag_name => 'button'))
+                   html_options.merge(:tag_name => 'button', :type => 'button'))
     end
 
     # Set the dialog title from +inside+ the dialog itself. This prints a
@@ -196,8 +196,9 @@ module JqrHelpers
 
       # Specifically do not add data-remote
       options[:'data-method'] = options.delete(:method)
-      options[:'class'] ||= ''
-      options[:'class'] << ' ujs-ajax-button'
+      options[:class] ||= ''
+      options[:class] << ' ujs-ajax-button'
+      options[:type] = 'button'
       options[:'data-url'] = url
       if options.key?(:confirm)
         options[:'data-confirm'] = options.delete(:confirm)
@@ -368,6 +369,7 @@ module JqrHelpers
       end
       url = url_for(url) if url.is_a?(Hash)
 
+      options[:type] = 'button'
       options['data-confirm'] = confirm if confirm
       options['data-disable-with'] = disable_with if disable_with
       options['data-method'] = method if method
