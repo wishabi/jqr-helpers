@@ -1,5 +1,5 @@
 (function($) {
-  function showThrobber(element) {
+  function showThrobber(element, noDisable) {
     switch ($(element).data('throbber')) {
       case 'none':
         return;
@@ -9,7 +9,9 @@
       default: // small or not given
         $(element).after("<img src='/images/jqr-helpers/throbber.gif' class='throbber'/>");
     }
-    $(element).attr('disabled', 'disabled');
+    if (!noDisable) {
+      $(element).attr('disabled', 'disabled');
+    }
     // refresh disabled state
     $(element).attr('autocomplete', 'off');
   }
@@ -194,7 +196,11 @@
       else
         $(element).data('throbber', 'large');
     }
-    showThrobber(element);
+    // can't disable form fields because then they won't receive
+    // the success event
+    var name = element.prop('tagName').toUpperCase();
+    showThrobber(element,
+        (name == 'INPUT' || name == 'SELECT' || name == 'TEXTAREA'));
   }
 
   function ujsAjaxSuccess(evt, data, status, xhr) {
@@ -426,6 +432,24 @@
         }
       });
       $(this).tabs(options);
+    });
+
+    // observe fields
+    $('.ujs-ajax-change').each(function() {
+      var dataAttrs = ['type', 'callback', 'refresh', 'redirect', 'scroll-to',
+        'throbber', 'empty', 'container', 'selector', 'result-method', 'url',
+        'method', 'params'];
+      var dataMap = {};
+      var element = $(this);
+      $.each(dataAttrs, function(index, val) {
+        dataMap[val] = element.data(val);
+        element.removeAttr('data-' + val);
+      });
+      element.removeClass('ujs-ajax');
+      // we have to set a data-remote attribute because Rails uses [data-remote]
+      // as a selector rather than checking the actual data in the element
+      $(this).find('input, select').data(dataMap).addClass('ujs-ajax').
+          attr('data-remote', 'true');
     });
 
   }

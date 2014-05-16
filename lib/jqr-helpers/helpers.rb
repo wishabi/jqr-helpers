@@ -385,6 +385,18 @@ module JqrHelpers
       content_tag(:button, content, options)
     end
 
+    # Observe a field for changes.
+    # On change, post to the Ajax URL and calculate callbacks.
+    # @param url [String] the URL to send to.
+    # @param options [Hash] Ajax options - see above.
+    # @return [String]
+    def ajax_change(url, options={}, &block)
+      options[:class] = 'ujs-ajax-change'
+      options = _process_ajax_options(options)
+      options['data-url'] = url
+      content_tag :span, options, &block
+    end
+
     # Generate a random string for IDs.
     # @return [String]
     # @private
@@ -536,6 +548,15 @@ module JqrHelpers
       new_options[:'data-throbber'] = options.delete(:throbber) || 'small'
       new_options[:'data-empty'] = options.delete(:empty)
       new_options[:'data-container'] = options.delete(:container)
+      method = options[:method]
+      if method
+        if method == 'put' || method == 'delete'
+          new_options[:'data-params'] = "_method=#{method}"
+          new_options[:'data-method'] = 'post'
+        else
+          new_options[:'data-method'] = method
+        end
+      end
 
       [:update, :append, :delete].each do |result_method|
         selector = options.delete(result_method)

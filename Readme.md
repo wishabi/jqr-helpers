@@ -58,6 +58,8 @@ they load a heck of a lot faster when you have dozens or hundreds of them.
 * `button_to_external` - create a working `button_to` button inside an existing form (!)
 * `will_paginate_ajax` - create a `will_paginate` interface that uses Ajax to
 replace the paginated contents.
+* `ajax_change` - monitor any inputs inside the given block for changes
+and send to the Ajax URL when they happen.
 
 There are two sets of options that recur throughout the methods here:
 
@@ -127,6 +129,8 @@ an ancestor of the button tag with the class of `my-parent`.
 Other Ajax options:
 
 * `:return_type` (String) - the expected return type, e.g. 'text' or 'html'.
+* `:method` (String) - GET, POST, PUT, or DELETE, if the default is incorrect
+  (GET for links, POST for forms and buttons).
 * `:empty` (String) - the ID of an element which should be shown when the
 element you are appending/deleting from is empty. If you delete the last child
 from an element, that element will be hidden and the "empty" element will
@@ -168,17 +172,25 @@ page).
 of the screen. `:small` would be a small inline throbber next to the button or
 link that called the dialog, and `:none` shows no throbber at all.
 
+## Monitoring Fields ##
+
+You can monitor a field for changes using the ``ajax_change`` method:
+
+    <%= ajax_change('/toggle_complete_url', :update => '.parent-row') do %>
+      <%= check_box_tag 'toggle_complete', 1, my_model.complete? %>
+    <% end %>
+
 ## Panel Renderers ##
 
 Tabs (and eventually accordion panes and menus) are rendered using a "panel renderer".
 This allows you to loop through the tabs in an intuitive and concise way.
 
-       <%= tab_container {:collapsible => true}, {:class => 'my-tabs}' do |r| %>
-         <% r.panel 'Tab 1' do %>
-           My tab content here
-         <% end %>
-         <% r.panel 'Tab 2', 'http://www.foobar.com/' %>
-       <% end %>
+    <%= tab_container {:collapsible => true}, {:class => 'my-tabs}' do |r| %>
+      <% r.panel 'Tab 1' do %>
+        My tab content here
+      <% end %>
+      <% r.panel 'Tab 2', 'http://www.foobar.com/' %>
+    <% end %>
 
 ## jQuery Events ##
 
