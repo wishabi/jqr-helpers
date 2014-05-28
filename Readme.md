@@ -32,9 +32,6 @@ into your public folders:
 
     rails g jqr_helpers:install
 
-Note that after copying, you will need to change the stylesheets from using
-`assets/*` to using `/images/*` to reflect the old way of routing static images.
-
 ## Helper Methods ##
 
 Full documentation can be found [here](https://rawgithub.com/wishabi/jqr-helpers/master/doc/JqrHelpers/Helpers.html).
