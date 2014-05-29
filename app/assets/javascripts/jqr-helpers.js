@@ -198,7 +198,7 @@
     }
     // can't disable form fields because then they won't receive
     // the success event
-    var name = element.prop('tagName').toUpperCase();
+    var name = $(element).prop('tagName').toUpperCase();
     showThrobber(element,
         (name == 'INPUT' || name == 'SELECT' || name == 'TEXTAREA'));
   }
