@@ -164,7 +164,7 @@ other elements.
 * `:scroll_to` (Boolean) - if given, the element that was updated or inserted
 will be scrolled into view (i.e. its top will be aligned with the top of the
 page).
-*`:throbber` (String) - This can be `:small`, `:large`, or
+* `:throbber` (String) - This can be `:small`, `:large`, or
 `:none`. By default it is `:small`, indicating a throbber that goes in front
 of the screen. `:small` would be a small inline throbber next to the button or
 link that called the dialog, and `:none` shows no throbber at all.
