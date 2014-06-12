@@ -165,9 +165,10 @@ other elements.
 will be scrolled into view (i.e. its top will be aligned with the top of the
 page).
 * `:throbber` (String) - This can be `:small`, `:large`, or
-`:none`. By default it is `:small`, indicating a throbber that goes in front
-of the screen. `:small` would be a small inline throbber next to the button or
-link that called the dialog, and `:none` shows no throbber at all.
+`:none`. By default for most Ajax requests it is `:small`, indicating 
+a small inline throbber next to the button or link. For ``link_to_dialog`` and
+``button_to_dialog``, the default is ``:large``, meaning a throbber that goes in 
+front of the screen.`:none` shows no throbber at all.
 
 ## Monitoring Fields ##
 
