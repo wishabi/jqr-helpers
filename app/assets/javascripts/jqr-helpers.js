@@ -23,7 +23,6 @@
   }
 
   var ujsDialogElement = null; // the element that opened the dialog
-  var ujsLastDialog = null; // last opened dialog
   var ujsSubmitElement = null; // the element that submitted a form
 
   // called from dialog button value
@@ -32,18 +31,19 @@
   }
 
   // called from dialog button value
+  // uses $.proxy to set the "this" context
   function ujsDialogClose() {
-    if (!ujsLastDialog) return;
-    if (ujsLastDialog.data('remote-dialog')) {
-      ujsLastDialog.dialog('destroy').remove();
+    var dialog = $(this).closest('.ui-dialog-content');
+    if (dialog.length == 0) dialog = $(this).find('.ui-dialog-content');
+    if (dialog.data('remote-dialog')) {
+      dialog.dialog('destroy').remove();
     }
     else {
-      ujsLastDialog.dialog('destroy').addClass('ujs-dialog-hidden');
+      dialog.dialog('destroy').addClass('ujs-dialog-hidden');
     }
   }
 
   function ujsDialogOpen() {
-    ujsLastDialog = $(this);
     $(this).css('maxHeight', ($(window).height() * 0.8) + 'px');
     if ($(this).parent().height() > $(window).height()) {
       $(this).height($(window).height() * 0.8);
@@ -102,10 +102,11 @@
           dialogOptions.buttons[index].click = ujsSubmitDialogForm;
         }
         else if (element == 'close') {
-          dialogOptions.buttons[index] = ujsDialogClose;
+          dialogOptions.buttons[index] = $.proxy(ujsDialogClose, dialogElement);
         }
         else if (element.click == 'close') {
-          dialogOptions.buttons[index].click = ujsDialogClose;
+          dialogOptions.buttons[index].click =
+              $.proxy(ujsDialogClose, dialogElement);
         }
         else {
           dialogOptions.buttons[index] = eval(element);
@@ -146,7 +147,7 @@
   }
 
   function ujsDialogCloseClick() {
-    ujsDialogClose();
+    ujsDialogClose.call(this);
     return false;
   }
 
@@ -231,7 +232,7 @@
       if (element.data('use-dialog-opener'))
         targetElement = ujsDialogElement;
       if (element.data('close-dialog'))
-        ujsDialogClose();
+        ujsDialogClose.call(element);
     }
     if (element.data('refresh')) {
       window.location.reload();
@@ -256,7 +257,10 @@
 
       switch (element.data('result-method')) {
         case 'update':
-          target = $(data).replaceAll(target);
+          // sometimes this adds text nodes
+          target = $(data).replaceAll(target).filter(function() {
+            return this.nodeType == 1;
+          });
           target.trigger('jqr.load');
           break;
         case 'append':
