@@ -22,7 +22,6 @@
     $(element).removeAttr('disabled');
   }
 
-  var ujsDialogElement = null; // the element that opened the dialog
   var ujsSubmitElement = null; // the element that submitted a form
 
   // called from dialog button value
@@ -30,12 +29,17 @@
     $('.ui-dialog:visible form').first().submit();
   }
 
+  function findDialog(element) {
+    var dialog = $(element).closest('.ui-dialog-content');
+    if (dialog.length == 0) dialog = $(element).find('.ui-dialog-content');
+    if (dialog.length == 0) dialog = $(element).prev('.ui-dialog-content');
+    return dialog;
+  }
+
   // called from dialog button value
   // uses $.proxy to set the "this" context
   function ujsDialogClose() {
-    var dialog = $(this).closest('.ui-dialog-content');
-    if (dialog.length == 0) dialog = $(this).find('.ui-dialog-content');
-    if (dialog.length == 0) dialog = $(this).prev('.ui-dialog-content');
+    var dialog = findDialog(this);
     if (dialog.data('remote-dialog')) {
       dialog.dialog('destroy').remove();
     }
@@ -65,7 +69,8 @@
   }
 
   function ujsDialogClick(event) {
-    ujsDialogElement = $(this);
+    $(this).uniqueId();
+    var dialogClickID = $(this).prop('id');
     var dialogID = $(this).data('dialog-id');
     var dialogElement = $('#' + dialogID);
     if (dialogID == 'next') dialogElement = $(this).next();
@@ -117,7 +122,7 @@
     if (url) {
       $(this).trigger('jqr.beforedialogopen');
       $(document.body).append('<div class="ui-widget-overlay ui-front">');
-      showThrobber(ujsDialogElement);
+      showThrobber($('#' + dialogClickID));
       var closeX = $(this).data('close-x');
       if (dialogElement.length == 0) {
         $('body').append("<div id='" + dialogID + "'>");
@@ -134,9 +139,10 @@
                 dialogElement.find('.ujs-dialog-title-hidden').text();
         }
         $('.ui-widget-overlay').remove();
-        hideThrobber(ujsDialogElement);
+        hideThrobber($('#' + dialogClickID));
         $('#ujs-dialog-throbber').remove();
         $(this).dialog(dialogOptions);
+        $(this).data('dialog-opener', dialogClickID);
         $(dialogElement).trigger('jqr.load');
       });
     }
@@ -230,8 +236,10 @@
     // if this was sent from a dialog, close the dialog and look at the
     // element that opened it for update/append/delete callbacks.
     if ($('.ui-dialog:visible').length) {
-      if (element.data('use-dialog-opener'))
-        targetElement = ujsDialogElement;
+      if (element.data('use-dialog-opener')) {
+        var dialog = findDialog(this);
+        targetElement = $('#' + dialog.data('dialog-opener'));
+      }
       if (element.data('close-dialog'))
         ujsDialogClose.call(element);
     }
