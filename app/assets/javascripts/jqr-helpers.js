@@ -147,6 +147,7 @@
       });
     }
     else {
+      dialogElement.data('dialog-opener', dialogClickID);
       dialogElement.dialog(dialogOptions);
     }
     event.stopPropagation();
