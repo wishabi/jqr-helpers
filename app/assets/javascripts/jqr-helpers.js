@@ -35,6 +35,7 @@
   function ujsDialogClose() {
     var dialog = $(this).closest('.ui-dialog-content');
     if (dialog.length == 0) dialog = $(this).find('.ui-dialog-content');
+    if (dialog.length == 0) dialog = $(this).prev('.ui-dialog-content');
     if (dialog.data('remote-dialog')) {
       dialog.dialog('destroy').remove();
     }
