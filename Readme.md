@@ -192,11 +192,15 @@ This allows you to loop through the tabs in an intuitive and concise way.
 
 ## jQuery Events ##
 
-There are two special events triggered by jqr-helpers:
+There are a few special events triggered by jqr-helpers:
 
 * `jqr.load` - this is triggered when a remote call populates an element with
 data. The target for the event is the element which has just had data
 populated.
+* `jqr.beforeload` - triggered just before `jqr.load`. This is useful if you
+want to make massage your DOM before allowing jqr-helpers to do its magic.
+* `jqr.afterload` - triggered just after `jqr.load`, allowing you to ensure
+jqr-helper's stuff is done *before* yours.
 * `jqr.beforedialogopen` - for remote dialogs, this is triggered when the
 link or button is clicked to open the dialog but before the request is sent out.
 

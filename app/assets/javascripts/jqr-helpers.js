@@ -502,8 +502,9 @@
       $('.ujs-quick-buttonset label').live('mouseenter mouseleave',
           ujsQuickButtonHover);
     }
-    $('body').trigger('jqr.load');
-
+    $('body').trigger('jqr.beforeload')
+        .trigger('jqr.load')
+        .trigger('jqr.afterload');
   });
 
 }(jQuery));
