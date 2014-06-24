@@ -377,6 +377,7 @@
 
   function ujsLoadPlugins(event) {
 
+    $(this).trigger('jqr.beforeload');
     $('.ujs-quick-buttonset input:checked').change();
 
     function addHiddenField(form, name, value) {
@@ -465,7 +466,7 @@
       $(this).find('input, select').data(dataMap).addClass('ujs-ajax').
           attr('data-remote', 'true');
     });
-
+    $(this).trigger('jqr.afterload');
   }
 
   $(function() {
@@ -502,9 +503,7 @@
       $('.ujs-quick-buttonset label').live('mouseenter mouseleave',
           ujsQuickButtonHover);
     }
-    $('body').trigger('jqr.beforeload')
-        .trigger('jqr.load')
-        .trigger('jqr.afterload');
+    $('body').trigger('jqr.load');
   });
 
 }(jQuery));
