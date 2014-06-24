@@ -143,7 +143,7 @@
         $('#ujs-dialog-throbber').remove();
         $(this).dialog(dialogOptions);
         $(this).data('dialog-opener', dialogClickID);
-        $(dialogElement).trigger('jqr.load');
+        $(dialogElement).trigger('jqr.beforeload').trigger('jqr.load');
       });
     }
     else {
@@ -267,6 +267,7 @@
 
       switch (element.data('result-method')) {
         case 'update':
+          target.trigger('jqr.beforeload');
           // sometimes this adds text nodes
           target = $(data).replaceAll(target).filter(function() {
             return this.nodeType == 1;
@@ -274,6 +275,7 @@
           target.trigger('jqr.load');
           break;
         case 'append':
+          target.trigger('jqr.beforeload');
           if (empty && target.children().length == 0) {
             $('#' + empty).hide();
             if (container) {
@@ -287,6 +289,7 @@
           target.trigger('jqr.load');
           break;
         case 'delete':
+          target.trigger('jqr.beforeload');
           if (empty && target.parent().children().length == 1) {
             if (container) {
               container.hide();
@@ -377,7 +380,6 @@
 
   function ujsLoadPlugins(event) {
 
-    $(this).trigger('jqr.beforeload');
     $('.ujs-quick-buttonset input:checked').change();
 
     function addHiddenField(form, name, value) {
@@ -466,7 +468,7 @@
       $(this).find('input, select').data(dataMap).addClass('ujs-ajax').
           attr('data-remote', 'true');
     });
-    $(this).trigger('jqr.afterload');
+    $(event.target).trigger('jqr.afterload');
   }
 
   $(function() {
@@ -503,7 +505,7 @@
       $('.ujs-quick-buttonset label').live('mouseenter mouseleave',
           ujsQuickButtonHover);
     }
-    $('body').trigger('jqr.load');
+    $('body').trigger('jqr.beforeload').trigger('jqr.load');
   });
 
 }(jQuery));
