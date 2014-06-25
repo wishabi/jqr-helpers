@@ -1,4 +1,16 @@
 (function($) {
+  // for older versions of jQuery UI
+  if (!$().uniqueId) {
+    var uuid = 1;
+    $.fn.uniqueId = function() {
+      return this.each(function() {
+        if (!this.id) {
+          this.id = 'ui-id-' + (++uuid);
+        }
+      });
+    };
+  }
+
   function showThrobber(element, noDisable) {
     switch ($(element).data('throbber')) {
       case 'none':
