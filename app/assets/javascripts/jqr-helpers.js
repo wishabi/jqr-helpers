@@ -120,11 +120,10 @@
           dialogOptions.buttons[index].click = ujsSubmitDialogForm;
         }
         else if (element == 'close') {
-          dialogOptions.buttons[index] = $.proxy(ujsDialogClose, dialogElement);
+          dialogOptions.buttons[index] = ujsDialogClose;
         }
         else if (element.click == 'close') {
-          dialogOptions.buttons[index].click =
-              $.proxy(ujsDialogClose, dialogElement);
+          dialogOptions.buttons[index].click = ujsDialogClose;
         }
         else {
           dialogOptions.buttons[index] = eval(element);
