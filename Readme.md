@@ -39,6 +39,8 @@ Full documentation can be found [here](https://rawgithub.com/wishabi/jqr-helpers
 * `link_to_dialog` - open a dialog when a link is clicked
 * `button_to_dialog` - open a dialog when a button is clicked
 * `confirm_button` - open a nice jQuery confirm dialog (rather than a built-in browser one)
+* `link_to_toggle` - when clicked, the link will toggle visibility for another element
+* `button_to_toggle`- when clicked, the button will toggle visibility for another element
 * `link_to_remote_dialog` - open a remote dialog when a link is clicked (i.e. load
 the dialog content from a remote route)
 * `button_to_remote_dialog` - open a remote dialog when a button is clicked

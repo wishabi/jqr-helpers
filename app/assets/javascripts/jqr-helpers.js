@@ -389,6 +389,11 @@
     $(event.currentTarget).toggleClass('ui-state-hover');
   }
 
+  function ujsToggleClick() {
+    var id = $(this).data('id');
+    $('#' + id).toggle();
+  }
+
   function ujsLoadPlugins(event) {
 
     $('.ujs-quick-buttonset input:checked').change();
@@ -500,6 +505,7 @@
           ujsQuickButtonClick);
       $(document).on('mouseenter mouseleave', '.ujs-quick-buttonset label',
           ujsQuickButtonHover);
+      $(document).on('click', '.ujs-toggle', ujsToggleClick);
     }
     else {
       $('body').live('jqr.load', ujsLoadPlugins);
@@ -515,6 +521,7 @@
       $('.ujs-quick-buttonset label').live('click', ujsQuickButtonClick);
       $('.ujs-quick-buttonset label').live('mouseenter mouseleave',
           ujsQuickButtonHover);
+      $('.ujs-toggle').live('click', ujsToggleClick);
     }
     $('body').trigger('jqr.beforeload').trigger('jqr.load');
   });

@@ -385,6 +385,25 @@ module JqrHelpers
       content_tag(:button, content, options)
     end
 
+    # Add a link which toggles the visibility of a separate element.
+    # @param body [String] the text for the link.
+    # @param id [String] the ID of the element to toggle.
+    # @param options [Hash] HTML options for the link.
+    def link_to_toggle(body, id, options={})
+      tag_name = options.delete(:tag_name) || :a
+      options[:class] ||= ''
+      options[:class] << ' ujs-toggle'
+      content_tag tag_name, body, options.merge(:'data-id' => id)
+    end
+
+    # Add a button which toggles the visibility of a separate element.
+    # @param body [String] the text for the button.
+    # @param id [String] the ID of the element to toggle.
+    # @param options [Hash] HTML options for the button.
+    def button_to_toggle(body, id, options={})
+      link_to_toggle(body, id, options.merge(:tag_name => 'button'))
+    end
+
     # Observe a field for changes.
     # On change, post to the Ajax URL and calculate callbacks.
     # @param url [String] the URL to send to.
