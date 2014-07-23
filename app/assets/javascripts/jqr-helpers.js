@@ -195,6 +195,12 @@
       }
 
       form.hide().append(metadata_input).appendTo('body');
+      if ($(element).data('params')) {
+        $.each($(element).data('params'), function(name, value) {
+          form.append("<input type='hidden' name='" + name +
+              "' value='" + value + "'/>");
+        });
+      }
       $(form).data(element.data()); // copy to form
       $(form).data('remote', true);
       $(form).addClass('ujs-ajax');
