@@ -397,7 +397,14 @@
 
   function ujsToggleClick() {
     var id = $(this).data('id');
+    var target = $('#' + id);
     $('#' + id).toggle();
+    if ($(target).is(':visible')) {
+      $(this).addClass('ujs-toggle-open').removeClass('ujs-toggle-closed');
+    }
+    else {
+      $(this).removeClass('ujs-toggle-open').addClass('ujs-toggle-closed');
+    }
   }
 
   function ujsLoadPlugins(event) {

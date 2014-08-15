@@ -385,14 +385,16 @@ module JqrHelpers
       content_tag(:button, content, options)
     end
 
-    # Add a link which toggles the visibility of a separate element.
+    # Add a link which toggles the visibility of a separate element. The link
+    # element itself will be given the class "ujs-toggle-open" and
+    # "ujs-toggle-closed" so you can style it.
     # @param body [String] the text for the link.
     # @param id [String] the ID of the element to toggle.
     # @param options [Hash] HTML options for the link.
     def link_to_toggle(body, id, options={})
       tag_name = options.delete(:tag_name) || :a
       options[:class] ||= ''
-      options[:class] << ' ujs-toggle'
+      options[:class] << ' ujs-toggle ujs-toggle-closed'
       content_tag tag_name, body, options.merge(:'data-id' => id)
     end
 
