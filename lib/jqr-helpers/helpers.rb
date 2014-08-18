@@ -390,11 +390,16 @@ module JqrHelpers
     # "ujs-toggle-closed" so you can style it.
     # @param body [String] the text for the link.
     # @param id [String] the ID of the element to toggle.
-    # @param options [Hash] HTML options for the link.
+    # @param options [Hash] HTML options for the link. An extra option is
+    #   start_open which indicates that the content to toggle is already
+    #   visible.
     def link_to_toggle(body, id, options={})
       tag_name = options.delete(:tag_name) || :a
       options[:class] ||= ''
-      options[:class] << ' ujs-toggle ujs-toggle-closed'
+      options[:class] << ' ujs-toggle'
+      options[:class] << (options.delete(:start_open) ?
+        ' ujs-toggle-open' :
+        ' ujs-toggle-closed')
       content_tag tag_name, body, options.merge(:'data-id' => id)
     end
 
