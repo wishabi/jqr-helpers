@@ -267,6 +267,30 @@ using content already on the page.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#button_to_toggle-instance_method" title="#button_to_toggle (instance method)">- (Object) <strong>button_to_toggle</strong>(body, id, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a button which toggles the visibility of a separate element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#buttonset-instance_method" title="#buttonset (instance method)">- (Object) <strong>buttonset</strong>(name, values, selected = nil, html_options = {}) </a>
     
 
@@ -486,6 +510,30 @@ using content already on the page.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#link_to_toggle-instance_method" title="#link_to_toggle (instance method)">- (Object) <strong>link_to_toggle</strong>(body, id, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a link which toggles the visibility of a separate element.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#quick_radio_set-instance_method" title="#quick_radio_set (instance method)">- (Object) <strong>quick_radio_set</strong>(name, values, selected = nil, html_options = {}) </a>
     
 
@@ -604,12 +652,12 @@ specifically for radio buttons.</p>
       <pre class="lines">
 
 
-403
-404
-405</pre>
+429
+430
+431</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 403</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 429</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid__random_string'>_random_string</span>
   <span class='const'>SecureRandom</span><span class='period'>.</span><span class='id identifier rubyid_hex'>hex</span><span class='lparen'>(</span><span class='int'>16</span><span class='rparen'>)</span>
@@ -703,15 +751,15 @@ callbacks.</p>
       <pre class="lines">
 
 
-393
-394
-395
-396
-397
-398</pre>
+419
+420
+421
+422
+423
+424</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 393</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 419</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ajax_change'>ajax_change</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ujs-ajax-change</span><span class='tstring_end'>'</span></span>
@@ -1261,6 +1309,101 @@ using content already on the page.</p>
   <span class='id identifier rubyid_html_options'>html_options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_link_to_remote_dialog'>link_to_remote_dialog</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_html_content'>html_content</span><span class='comma'>,</span> <span class='id identifier rubyid_dialog_options'>dialog_options</span><span class='comma'>,</span>
                <span class='id identifier rubyid_html_options'>html_options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='symbol'>:tag_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>button</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>button</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="button_to_toggle-instance_method">
+  
+    - (<tt>Object</tt>) <strong>button_to_toggle</strong>(body, id, options = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a button which toggles the visibility of a separate element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>body</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the text for the button.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the element to toggle.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>HTML options for the button.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+410
+411
+412</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 410</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_button_to_toggle'>button_to_toggle</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_link_to_toggle'>link_to_toggle</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='symbol'>:tag_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>button</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2388,6 +2531,116 @@ pass :div, :span, etc.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="link_to_toggle-instance_method">
+  
+    - (<tt>Object</tt>) <strong>link_to_toggle</strong>(body, id, options = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a link which toggles the visibility of a separate element. The link
+element itself will be given the class "ujs-toggle-open" and
+"ujs-toggle-closed" so you can style it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>body</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the text for the link.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the ID of the element to toggle.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>HTML options for the link. An extra option is start_open which indicates
+that the content to toggle is already visible.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+396
+397
+398
+399
+400
+401
+402
+403
+404</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 396</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_link_to_toggle'>link_to_toggle</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_tag_name'>tag_name</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:tag_name</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='symbol'>:a</span>
+  <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ujs-toggle</span><span class='tstring_end'>'</span></span>
+  <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:start_open</span><span class='rparen'>)</span> <span class='op'>?</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ujs-toggle-open</span><span class='tstring_end'>'</span></span> <span class='op'>:</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> ujs-toggle-closed</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_content_tag'>content_tag</span> <span class='id identifier rubyid_tag_name'>tag_name</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='symbol'>:data-id</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="quick_radio_set-instance_method">
   
     - (<tt>Object</tt>) <strong>quick_radio_set</strong>(name, values, selected = nil, html_options = {}) 
@@ -2776,23 +3029,23 @@ selector.</p>
       <pre class="lines">
 
 
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484
-485
-486
-487
-488</pre>
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 475</span>
+      <pre class="code"><span class="info file"># File 'lib/jqr-helpers/helpers.rb', line 501</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_will_paginate_ajax'>will_paginate_ajax</span><span class='lparen'>(</span><span class='id identifier rubyid_collection'>collection</span><span class='comma'>,</span> <span class='id identifier rubyid_to_update'>to_update</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='const'>AjaxLinkRenderer</span><span class='rparen'>)</span>
@@ -2818,7 +3071,7 @@ selector.</p>
 </div>
 
     <div id="footer">
-  Generated on Fri May 16 14:31:13 2014 by
+  Generated on Thu Sep  4 12:01:25 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.5.2 (ruby-1.9.3).
 </div>
