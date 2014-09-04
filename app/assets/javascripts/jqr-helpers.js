@@ -197,8 +197,8 @@
       form.hide().append(metadata_input).appendTo('body');
       if ($(element).data('params')) {
         $.each($(element).data('params'), function(name, value) {
-          form.append("<input type='hidden' name='" + name +
-              "' value='" + value + "'/>");
+          var input = $j('<input>', { 'name': name, 'value': value});
+          form.append(input);
         });
       }
       $(form).data(element.data()); // copy to form
