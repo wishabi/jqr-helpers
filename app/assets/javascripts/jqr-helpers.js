@@ -182,6 +182,16 @@
       element.data('confirm', null); // we've already fired it
       // largely copied from rails_jquery.js
       var href = element.data('url');
+      if (element.data('params')) {
+        $.each(element.data('params'), function(name, value) {
+          if (href.indexOf('?') > 0) {
+            href += '&' + name + '=' + encodeURIComponent(value);
+          }
+          else {
+            href += '?' + name + '=' + encodeURIComponent(value);
+          }
+        });
+      }
       var method = element.data('method');
       var csrf_token = $('meta[name=csrf-token]').attr('content');
       var csrf_param = $('meta[name=csrf-param]').attr('content');
@@ -195,12 +205,6 @@
       }
 
       form.hide().append(metadata_input).appendTo('body');
-      if ($(element).data('params')) {
-        $.each($(element).data('params'), function(name, value) {
-          var input = $j('<input>', { 'name': name, 'value': value});
-          form.append(input);
-        });
-      }
       $(form).data(element.data()); // copy to form
       $(form).data('remote', true);
       $(form).addClass('ujs-ajax');
