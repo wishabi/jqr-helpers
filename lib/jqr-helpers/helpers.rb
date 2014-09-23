@@ -70,7 +70,7 @@ module JqrHelpers
       html_options[:'data-close-x'] = dialog_options[:close_x]
 
       tag_name = html_options.delete(:tag_name) || :a
-      html_options[:href] = '#' if tag_name == :a
+      html_options[:href] ||= '#' if tag_name == :a
 
       dialog_options[:dialogClass] ||= ''
       if dialog_options[:title] == false # not nil or blank
@@ -123,6 +123,10 @@ module JqrHelpers
     # using content already on the page.
     # If a block is given, dialog_options and html_options are shifted left by
     # 1 and the block is used as the html_content.
+    # Note that this method should only be used if the URL being linked to
+    # is valid to display by itself (i.e. the user can copy/paste it or
+    # open it in a new tab). If it is only viewable in a partial, you should
+    # be using button_to_remote_dialog.
     # @param url [String] The URL to load the content from.
     # @param html_content [String] Text or HTML tags to use as the link body.
     # @param dialog_options [Hash] Dialog options as described in the readme.
@@ -138,6 +142,7 @@ module JqrHelpers
         dialog_options = html_content
         html_content = capture(&block)
       end
+      html_options[:href] = url
       html_options[:'data-throbber'] =
         dialog_options.delete(:throbber) || 'large'
 
