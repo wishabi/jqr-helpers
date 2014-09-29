@@ -81,6 +81,10 @@
   }
 
   function ujsDialogClick(event) {
+    if ((event.ctrlKey || event.shiftKey || event.metaKey) &&
+        $(this).is('a')) {
+      return;
+    }
     $(this).uniqueId();
     var dialogClickID = $(this).prop('id');
     var dialogID = $(this).data('dialog-id');
