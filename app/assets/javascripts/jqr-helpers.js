@@ -415,50 +415,47 @@
     }
   }
 
+  function addHiddenField(form, name, value) {
+    var input = $('<input type="hidden">');
+    input.attr('name', name);
+    input.attr('value', value);
+    form.append(input);
+  }
+
+  function ujsExternalClick(event) {
+    event.stopImmediatePropagation();
+    var button = $(this);
+    if (!$.rails.allowAction(button)) {
+      return false;
+    }
+    if (button.data('disable-with')) {
+      button.html(button.data('disable-with'));
+      button.attr('disabled', 'disabled');
+      button.attr('autocomplete', 'off');
+    }
+    var form = $('<form>');
+    var method = button.data('method');
+    if (method == 'put' || method == 'delete') {
+      form.attr('method', 'post');
+      addHiddenField(form, '_method', method);
+    }
+    else {
+      form.attr('method', method);
+    }
+    form.attr('action', button.data('url'));
+    form.attr('target', button.data('target'));
+    if (method != 'get') {
+      form.attr('rel', 'nofollow');
+      addHiddenField(form, button.data('token-name'),
+          button.data('token-value'));
+    }
+    $('body').append(form);
+    form.submit();
+    return false;
+  }
+
   function ujsLoadPlugins(event) {
 
-    $('.ujs-quick-buttonset input:checked').change();
-
-    function addHiddenField(form, name, value) {
-      var input = $('<input type="hidden">');
-      input.attr('name', name);
-      input.attr('value', value);
-      form.append(input);
-    }
-
-    $('.ujs-external-button').each(function() {
-      var button = $(this);
-      var form = $('<form>');
-      var method = button.data('method');
-      if (method == 'put' || method == 'delete') {
-        form.attr('method', 'post');
-        addHiddenField(form, '_method', method);
-      }
-      else {
-        form.attr('method', method);
-      }
-      form.attr('action', button.data('url'));
-      form.attr('target', button.data('target'));
-      if (method != 'get') {
-        form.attr('rel', 'nofollow');
-        addHiddenField(form, button.data('token-name'),
-            button.data('token-value'));
-      }
-      $('body').append(form);
-      button.click(function(event) {
-        event.stopImmediatePropagation();
-        if (!$.rails.allowAction(button)) {
-          return false;
-        }
-        if (button.data('disable-with')) {
-          button.html(button.data('disable-with'));
-          button.attr('disabled', 'disabled');
-          button.attr('autocomplete', 'off');
-        }
-        form.submit();
-        return false;
-      });
-    });
     $('.ujs-date-picker', event.target).each(function() {
       var options = $(this).data('date-options');
       $(this).datepicker(options);
@@ -527,6 +524,7 @@
       $(document).on('mouseenter mouseleave', '.ujs-quick-buttonset label',
           ujsQuickButtonHover);
       $(document).on('click', '.ujs-toggle', ujsToggleClick);
+      $(document).on('click', '.ujs-external-button', ujsExternalClick);
     }
     else {
       $('body').live('jqr.load', ujsLoadPlugins);
@@ -543,6 +541,7 @@
       $('.ujs-quick-buttonset label').live('mouseenter mouseleave',
           ujsQuickButtonHover);
       $('.ujs-toggle').live('click', ujsToggleClick);
+      $('.ujs-external-button').live('click', ujsExternalClick);
     }
     $('body').trigger('jqr.beforeload').trigger('jqr.load');
   });

@@ -334,6 +334,7 @@ module JqrHelpers
     def quick_radio_set(name, values, selected=nil, html_options={})
       html_options[:class] ||= ''
       html_options[:class] << ' ujs-quick-buttonset ui-buttonset'
+      html_options[:autocomplete] = 'off'
       content = ''
       last_key = values.keys.length - 1
       values.each_with_index do |(value, label), i|
