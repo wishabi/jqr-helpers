@@ -240,7 +240,9 @@ module JqrHelpers
       options[:close_dialog] = true if options[:close_dialog].nil?
       options[:use_dialog_opener] = true if options[:use_dialog_opener].nil?
       options[:html] ||= {}
+      orig_class = options[:html][:class]
       options[:html].merge!(_process_ajax_options(options))
+      options[:html][:class] << " #{orig_class}"
 
       form_for record, options, &block
 
