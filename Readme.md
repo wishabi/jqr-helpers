@@ -167,10 +167,17 @@ other elements.
 will be scrolled into view (i.e. its top will be aligned with the top of the
 page).
 * `:throbber` (String) - This can be `:small`, `:large`, or
-`:none`. By default for most Ajax requests it is `:small`, indicating 
+`:none`. By default for most Ajax requests it is `:small`, indicating
 a small inline throbber next to the button or link. For ``link_to_dialog`` and
-``button_to_dialog``, the default is ``:large``, meaning a throbber that goes in 
+``button_to_dialog``, the default is ``:large``, meaning a throbber that goes in
 front of the screen.`:none` shows no throbber at all.
+
+## Render Responses ##
+
+For Ajax options, `update` and `append` expect HTML responses. Generally
+you would do this in your Rails controller by rendering a partial, or a view
+with `:layout => false`. Conversely, when using `delete`, the JS expects a
+simple text response of `success` since there it is simply deleting a row.
 
 ## Monitoring Fields ##
 
