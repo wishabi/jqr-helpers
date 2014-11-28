@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name         = 'jqr-helpers'
   s.require_paths = %w(. lib lib/jqr-helpers)
-  s.version      = '1.0.63'
+  s.version      = '1.0.64'
   s.date         = '2014-11-27'
   s.summary      = 'Helpers to print unobtrusive jQuery-UI tags.'
   s.description  = <<-EOF
