@@ -497,10 +497,30 @@
         element.removeAttr('data-' + val);
       });
       element.removeClass('ujs-ajax');
-      // we have to set a data-remote attribute because Rails uses [data-remote]
-      // as a selector rather than checking the actual data in the element
-      $(this).find('input, select').data(dataMap).addClass('ujs-ajax').
-          attr('data-remote', 'true');
+      $(this).find('input, select').data(dataMap).change(function() {
+        // unchecked checkboxes would not be included. We'll replace it
+        // with a checked one and value 0.
+        $('body').remove('.jqr-hidden-checkbox');
+        if ($(this).is(':checkbox:not(:checked)')) {
+          $(this).uniqueId();
+          element = $(this).clone();
+          element.data($(this).data());
+          element.data('real-element', $(this).attr('id'));
+          element.prop('value', '0');
+          element.prop('checked', true);
+          element.hide();
+          element.addClass('jqr-hidden-checkbox').addClass('ujs-ajax');
+          element.attr('data-remote', true);
+          $('body').append(element);
+          $.rails.handleRemote(element);
+        }
+        else {
+          // Rails checks the attribute, not the data
+          $(this).attr('data-remote', true).addClass('ujs-ajax');
+          $.rails.handleRemote($(this));
+          $(this).removeAttr('data-remote');
+        }
+      });
     });
     $(event.target).trigger('jqr.afterload');
   }
