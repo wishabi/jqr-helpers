@@ -486,7 +486,7 @@
     });
 
     // observe fields
-    $('.ujs-ajax-change').each(function() {
+    $('.ujs-ajax-change', event.target).each(function() {
       var dataAttrs = ['type', 'callback', 'refresh', 'redirect', 'scroll-to',
         'throbber', 'empty', 'container', 'selector', 'result-method', 'url',
         'method', 'params'];
@@ -504,6 +504,7 @@
         if ($(this).is(':checkbox:not(:checked)')) {
           $(this).uniqueId();
           element = $(this).clone();
+          element.attr('id', '');
           element.data($(this).data());
           element.data('real-element', $(this).attr('id'));
           element.prop('value', '0');
