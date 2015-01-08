@@ -163,6 +163,9 @@ other elements.
 this indicates that the dialog should be closed when the request completes
 successfully. This is true by default for forms and false for
 other elements.
+* `:alert_message` (Boolean) - if true, a string response which is *not*
+`success` will not be considered an error - it will be alerted to the user
+but will not stop the normal functionality from proceeding.
 * `:scroll_to` (Boolean) - if given, the element that was updated or inserted
 will be scrolled into view (i.e. its top will be aligned with the top of the
 page).
@@ -178,6 +181,10 @@ For Ajax options, `update` and `append` expect HTML responses. Generally
 you would do this in your Rails controller by rendering a partial, or a view
 with `:layout => false`. Conversely, when using `delete`, the JS expects a
 simple text response of `success` since there it is simply deleting a row.
+
+If you want to alert a message and *also* accomplish the default functionality
+(such as updating HTML or closing a dialog box), simply use the `alert_message`
+option in your Ajax link/button/form.
 
 ## Monitoring Fields ##
 

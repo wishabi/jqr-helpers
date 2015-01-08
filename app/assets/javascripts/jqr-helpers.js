@@ -257,7 +257,9 @@
     else if (!element.data('callback') && data &&
         data.trim().charAt(0) != '<' && data != 'success') {
       alert(data);
-      return;
+      if (!element.data('alert-message')) {
+        return;
+      }
     }
     // if this was sent from a dialog, close the dialog and look at the
     // element that opened it for update/append/delete callbacks.

@@ -575,6 +575,7 @@ module JqrHelpers
       new_options[:'data-type'] = options[:return_type] || 'html'
       new_options[:'data-callback'] = options.delete(:callback)
       new_options[:'data-close-dialog'] = options.delete(:close_dialog)
+      new_options[:'data-alert-message'] = options.delete(:alert_message)
       new_options[:'data-use-dialog-opener'] = options.delete(:use_dialog_opener)
       new_options[:'data-refresh'] = true if options.delete(:refresh)
       new_options[:'data-redirect'] = true if options.delete(:redirect)
