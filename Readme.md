@@ -192,6 +192,7 @@ You can monitor a field for changes using the ``ajax_change`` method:
 
     <%= ajax_change('/toggle_complete_url', :update => '.parent-row') do %>
       <%= check_box_tag 'toggle_complete', 1, my_model.complete? %>
+      <%= hidden_field_tag :additional_field, 'additional_value' %>
     <% end %>
 
 ## Panel Renderers ##

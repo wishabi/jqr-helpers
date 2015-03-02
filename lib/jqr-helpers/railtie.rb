@@ -1,5 +1,5 @@
-require 'helpers'
-require 'engine'
+require 'jqr-helpers/helpers'
+require 'jqr-helpers/engine'
 
 module JqrHelpers
   # @private
