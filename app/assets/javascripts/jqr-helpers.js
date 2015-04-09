@@ -37,8 +37,8 @@
   var ujsSubmitElement = null; // the element that submitted a form
 
   // called from dialog button value
-  function ujsSubmitDialogForm() {
-    $('.ui-dialog:visible form').first().submit();
+  function ujsSubmitDialogForm(event) {
+    $(event.target).parents('.ui-dialog').find('form').first().submit();
   }
 
   function findDialog(element) {
@@ -507,32 +507,32 @@
                   encodeURIComponent($(this).val());
             });
             params = $.makeArray(params).join('&');
-            // unchecked checkboxes would not be included. We'll replace it
-            // with a checked one and value 0.
-            $('body').remove('.jqr-hidden-checkbox');
-            if ($(this).is(':checkbox:not(:checked)')) {
-              $(this).uniqueId();
-              element = $(this).clone();
-              element.attr('id', '');
-              element.data($(this).data());
-              element.data('real-element', $(this).attr('id'));
-              element.prop('value', '0');
-              element.prop('checked', true);
-              element.hide();
-              element.addClass('jqr-hidden-checkbox').addClass('ujs-ajax');
-              element.attr('data-remote', true);
-              $('body').append(element);
+        // unchecked checkboxes would not be included. We'll replace it
+        // with a checked one and value 0.
+        $('body').remove('.jqr-hidden-checkbox');
+        if ($(this).is(':checkbox:not(:checked)')) {
+          $(this).uniqueId();
+          element = $(this).clone();
+          element.attr('id', '');
+          element.data($(this).data());
+          element.data('real-element', $(this).attr('id'));
+          element.prop('value', '0');
+          element.prop('checked', true);
+          element.hide();
+          element.addClass('jqr-hidden-checkbox').addClass('ujs-ajax');
+          element.attr('data-remote', true);
+          $('body').append(element);
               $(element).data('params', params);
-              $.rails.handleRemote(element);
-            }
-            else {
-              // Rails checks the attribute, not the data
-              $(this).attr('data-remote', true).addClass('ujs-ajax');
+          $.rails.handleRemote(element);
+        }
+        else {
+          // Rails checks the attribute, not the data
+          $(this).attr('data-remote', true).addClass('ujs-ajax');
               $(this).data('params', params);
-              $.rails.handleRemote($(this));
-              $(this).removeAttr('data-remote');
-            }
-          });
+          $.rails.handleRemote($(this));
+          $(this).removeAttr('data-remote');
+        }
+      });
     });
     $(event.target).trigger('jqr.afterload');
   }
