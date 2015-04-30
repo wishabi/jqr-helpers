@@ -312,13 +312,19 @@ module JqrHelpers
     # @param values [Hash<String, String>] a hash of value => label.
     # @param selected [String] the selected value, if any.
     # @param html_options [Hash] a set of options that will be passed into
-    #   the parent div tag.
+    #   the parent div tag. Special option is :input_id, which will be appended
+    #   to both label and radio button to avoid having the same ID on different
+    #   buttons (e.g. when displaying multiple times for different objects),
+    #   which would cause the buttonset not to work.
     def buttonset(name, values, selected=nil, html_options={})
       html_options[:class] ||= ''
       html_options[:class] << ' ujs-button-set'
+      given_id = html_options.delete(:input_id)
       content = values.inject('') do |sum, (value, label)|
-        sum += radio_button_tag(name, value, selected == value) +
-          label_tag("#{name}_#{value}", label)
+        id = "#{name}_#{value}"
+        id << "_#{given_id}" if given_id
+        sum += radio_button_tag(name, value, selected == value, :id => id) +
+          label_tag(id, label)
       end
       content_tag(:div, raw(content), html_options)
     end
