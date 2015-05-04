@@ -321,7 +321,7 @@ module JqrHelpers
       html_options[:class] << ' ujs-button-set'
       given_id = html_options.delete(:input_id)
       content = values.inject('') do |sum, (value, label)|
-        id = "#{name}_#{value}"
+        id = "#{sanitize_to_id(name)}_#{sanitize_to_id(value)}"
         id << "_#{given_id}" if given_id
         sum += radio_button_tag(name, value, selected == value, :id => id) +
           label_tag(id, label)
