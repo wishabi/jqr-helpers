@@ -503,7 +503,10 @@ module JqrHelpers
         end
 
       end
-    rescue # no will_paginate installed
+    rescue Exception => e # no will_paginate installed
+      unless e.is_a?(LoadError)
+        raise e
+      end
     end
 
     # Create a will_paginate pagination interface which runs via Ajax. If
