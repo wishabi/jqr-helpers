@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name         = 'jqr-helpers'
   s.require_paths = %w(. lib lib/jqr-helpers)
-  s.version      = '1.0.73'
-  s.date         = '2016-02-22'
+  s.version      = '1.0.74'
+  s.date         = '2016-06-17'
   s.summary      = 'Helpers to print unobtrusive jQuery-UI tags.'
   s.description  = <<-EOF
     This gem adds helper methods to create unobtrusive jQuery code. It outputs

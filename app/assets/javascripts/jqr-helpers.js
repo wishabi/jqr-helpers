@@ -415,6 +415,7 @@
     else {
       $(this).removeClass('ujs-toggle-open').addClass('ujs-toggle-closed');
     }
+    return false;
   }
 
   function addHiddenField(form, name, value) {
