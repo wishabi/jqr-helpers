@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name         = 'jqr-helpers'
   s.require_paths = %w(. lib lib/jqr-helpers)
-  s.version      = '1.0.74'
-  s.date         = '2016-06-17'
+  s.version      = '1.0.75'
+  s.date         = '2025-02-26'
   s.summary      = 'Helpers to print unobtrusive jQuery-UI tags.'
   s.description  = <<-EOF
     This gem adds helper methods to create unobtrusive jQuery code. It outputs
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
     the page, dialogs (including remote dialogs), date pickers and tab containers.
 EOF
   s.authors      = ['Daniel Orner']
-  s.email        = 'daniel.orner@wishabi.com'
+  s.email        = 'daniel.orner@flipp.com'
   s.files        = `git ls-files`.split($/)
   s.homepage     = 'https://github.com/wishabi/jqr-helpers'
   s.license       = 'MIT'
