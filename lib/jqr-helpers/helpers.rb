@@ -65,7 +65,7 @@ module JqrHelpers
       end
 
       html_options[:class] ||= ''
-      html_options[:class] << ' ujs-dialog'
+      html_options[:class] += ' ujs-dialog'
       html_options[:'data-dialog-id'] = dialog_id
       html_options[:'data-close-x'] = dialog_options[:close_x]
 
@@ -74,10 +74,10 @@ module JqrHelpers
 
       dialog_options[:dialogClass] ||= ''
       if dialog_options[:title] == false # not nil or blank
-        dialog_options[:dialogClass] << ' ujs-dialog-modal no-title'
+        dialog_options[:dialogClass] += ' ujs-dialog-modal no-title'
       else
         dialog_options[:title] ||= 'Dialog'
-        dialog_options[:dialogClass] << ' ujs-dialog-modal'
+        dialog_options[:dialogClass] += ' ujs-dialog-modal'
       end
       dialog_options[:modal] = true
       dialog_options[:width] ||= 'auto'
@@ -202,7 +202,7 @@ module JqrHelpers
       # Specifically do not add data-remote
       options[:'data-method'] = options.delete(:method)
       options[:class] ||= ''
-      options[:class] << ' ujs-ajax-button'
+      options[:class] += ' ujs-ajax-button'
       options[:type] = 'button'
       options[:'data-url'] = url
       if options.key?(:confirm)
@@ -242,7 +242,7 @@ module JqrHelpers
       options[:html] ||= {}
       orig_class = options[:html][:class]
       options[:html].merge!(_process_ajax_options(options))
-      options[:html][:class] << " #{orig_class}"
+      options[:html][:class] += " #{orig_class}"
 
       form_for record, options, &block
 
@@ -265,13 +265,13 @@ module JqrHelpers
       renderer = PanelRenderer.new
       capture(renderer, &block)
       html_options[:class] ||= ''
-      html_options[:class] << ' ujs-tab-container'
+      html_options[:class] += ' ujs-tab-container'
       html_options[:'data-tab-options'] = options.to_json
       content_tag(:div, html_options) do
         s = content_tag :ul do
           s2 = ''
           renderer.panels.each do |panel|
-            s2 << content_tag(:li) do
+            s2 += content_tag(:li) do
               link_to panel[:title], panel[:url]
             end
           end
@@ -305,7 +305,7 @@ module JqrHelpers
       options[:dateFormat] = _map_date(format)
       html_options[:'data-date-options'] = options.to_json
       html_options[:class] ||= ''
-      html_options[:class] << ' ujs-date-picker'
+      html_options[:class] += ' ujs-date-picker'
       text_field_tag(name, value, html_options)
     end
 
@@ -321,11 +321,11 @@ module JqrHelpers
     #   which would cause the buttonset not to work.
     def buttonset(name, values, selected=nil, html_options={})
       html_options[:class] ||= ''
-      html_options[:class] << ' ujs-button-set'
+      html_options[:class] += ' ujs-button-set'
       given_id = html_options.delete(:input_id)
       content = values.inject('') do |sum, (value, label)|
         id = "#{sanitize_to_id(name)}_#{sanitize_to_id(value)}"
-        id << "_#{given_id}" if given_id
+        id += "_#{given_id}" if given_id
         sum += radio_button_tag(name, value, selected == value, :id => id) +
           label_tag(id, label)
       end
@@ -344,18 +344,18 @@ module JqrHelpers
     #   the parent div tag.
     def quick_radio_set(name, values, selected=nil, html_options={})
       html_options[:class] ||= ''
-      html_options[:class] << ' ujs-quick-buttonset ui-buttonset'
+      html_options[:class] += ' ujs-quick-buttonset ui-buttonset'
       html_options[:autocomplete] = 'off'
       content = ''
       last_key = values.keys.length - 1
       values.each_with_index do |(value, label), i|
-        content << radio_button_tag(name, value, selected == value,
+        content += radio_button_tag(name, value, selected == value,
                                 :class => 'ui-helper-hidden-accessible')
         label_class = 'ui-button ui-widget ui-state-default ui-button-text-only'
-        label_class << ' ui-state-active' if selected == value
-        label_class << ' ui-corner-left' if i == 0
-        label_class << ' ui-corner-right' if i == last_key
-        content << label_tag("#{name}_#{value}", :class => label_class,
+        label_class += ' ui-state-active' if selected == value
+        label_class += ' ui-corner-left' if i == 0
+        label_class += ' ui-corner-right' if i == last_key
+        content += label_tag("#{name}_#{value}", :class => label_class,
                              :role => 'button',
                              :'aria-disabled' => 'false') do
           content_tag :span, label, :class => 'ui-button-text'
@@ -393,7 +393,7 @@ module JqrHelpers
       options['data-url'] = url
       options[:'data-target'] = options.delete(:target)
       options[:class] ||= ''
-      options[:class] << ' ujs-external-button'
+      options[:class] += ' ujs-external-button'
       if token_name
         options['data-token-name'] = token_name
         options['data-token-value'] = token_value
@@ -413,8 +413,8 @@ module JqrHelpers
     def link_to_toggle(body, id, options={})
       tag_name = options.delete(:tag_name) || :a
       options[:class] ||= ''
-      options[:class] << ' ujs-toggle'
-      options[:class] << (options.delete(:start_open) ?
+      options[:class] += ' ujs-toggle'
+      options[:class] += (options.delete(:start_open) ?
         ' ujs-toggle-open' :
         ' ujs-toggle-closed')
       content_tag tag_name, body, options.merge(:'data-id' => id)
@@ -583,7 +583,7 @@ module JqrHelpers
     def _process_ajax_options(options)
       new_options = {}
       new_options[:class] = options[:class] || ''
-      new_options[:class] << ' ujs-ajax'
+      new_options[:class] += ' ujs-ajax'
       new_options[:'data-type'] = options[:return_type] || 'html'
       new_options[:'data-callback'] = options.delete(:callback)
       new_options[:'data-close-dialog'] = options.delete(:close_dialog)
